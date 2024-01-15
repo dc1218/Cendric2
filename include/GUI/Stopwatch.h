@@ -22,7 +22,7 @@ private:
 	void initBackgroundLayers();
 
 private:
-	BitmapText m_text;
+	sf::Text m_text;
 	const CharacterCore* m_core;
 	Window* m_window = nullptr;
 };

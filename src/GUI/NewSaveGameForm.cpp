@@ -26,14 +26,17 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	setPosition(sf::Vector2f(box.left, box.top));
 
 	// message
-	m_message = BitmapText(
-		g_textProvider->getCroppedText("MessageNewSaveGame", GUIConstants::CHARACTER_SIZE_L, static_cast<int>(m_window->getSize().x - (2 * DIST_FROM_BORDER))));
+	
+	std::string line = g_textProvider->getCroppedText("MessageNewSaveGame", GUIConstants::CHARACTER_SIZE_L, static_cast<int>(m_window->getSize().x - (2 * DIST_FROM_BORDER)));
+	m_message.setString(sf::String::fromUtf8(line.begin(),line.end()));
+	m_message.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_message.setColor(COLOR_WHITE);
 	m_message.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	// calculate position
 	m_message.setPosition(sf::Vector2f(DIST_FROM_BORDER, DIST_FROM_BORDER) + getPosition());
 
 	m_savegameName = "";
+	m_savegameNameText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_savegameNameText.setString(m_savegameName);
 	m_savegameNameText.setColor(COLOR_LIGHT_PURPLE);
 	m_savegameNameText.setCharacterSize(16);
@@ -63,7 +66,7 @@ const std::string& NewSaveGameForm::getSavegameName() const {
 void NewSaveGameForm::update(const sf::Time& frameTime) {
 	g_inputController->cropReadText(MAX_NAME_LENGTH);
 	m_savegameName = g_inputController->getReadText();
-	m_savegameNameText.setString(m_savegameName);
+	m_savegameNameText.setString(sf::String::fromUtf8(m_savegameName.begin(),m_savegameName.end()));
 	m_okButton->setEnabled(m_savegameName.size() < MAX_NAME_LENGTH && !m_savegameName.empty());
 	m_buttonGroup->update(frameTime);
 

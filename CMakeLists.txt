@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 3.15)
 
 project(Cendric)
 
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
+
 option(CENDRIC_BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
-option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool on Windows platform?" ON)
+option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool on Windows platform?" OFF)
 option(CENDRIC_STEAM "Include steamworks API?" OFF)
 option(CENDRIC_EXTERNAL_DOCUMENT_FOLDER "Use external documents folder?" OFF)
 option(CENDRIC_GERMAN "Use German as default language?" OFF)

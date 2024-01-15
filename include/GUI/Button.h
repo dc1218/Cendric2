@@ -85,8 +85,8 @@ protected:
 	sf::Color m_selectedColor;
 	sf::Color m_textureLayerColor;
 
-	BitmapText m_text;
-	BitmapText m_keyText;
+	sf::Text m_text;
+	sf::Text m_keyText;
 
 	void updateColor() override;
 	void reloadTextPosition();

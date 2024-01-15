@@ -64,9 +64,11 @@ void Inventory::init() {
 	// init text
 	m_selectedTabText.setColor(COLOR_WHITE);
 	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_selectedTabText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 
 	m_goldText.setColor(COLOR_WHITE);
 	m_goldText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_goldText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 
 	m_goldSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
 	m_goldSprite.setTextureRect(sf::IntRect(0, 0, 25, 25));
@@ -112,6 +114,7 @@ void Inventory::init() {
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	// init empty text
+	m_emptyText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_emptyText.setString(g_textProvider->getText("Empty"));
 
@@ -140,7 +143,7 @@ void Inventory::setPosition(const sf::Vector2f& position) {
 		GUIConstants::GUI_WINDOW_HEIGHT - GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S));
 
 	sf::Vector2f pos = m_goldText.getPosition();
-	pos.x += m_goldText.getBounds().width + 0.2f * GUIConstants::TEXT_OFFSET;
+	pos.x += m_goldText.getGlobalBounds().width + 0.2f * GUIConstants::TEXT_OFFSET;
 	pos.y += 0.5f * GUIConstants::CHARACTER_SIZE_M - 13.f;
 	m_goldSprite.setPosition(pos);
 
@@ -152,7 +155,7 @@ void Inventory::setPosition(const sf::Vector2f& position) {
 	m_scrollBar->setPosition(position + sf::Vector2f(SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, SCROLL_WINDOW_TOP));
 	m_scrollHelper->setPosition(position + sf::Vector2f(SCROLL_WINDOW_LEFT, SCROLL_WINDOW_TOP));
 
-	const sf::FloatRect bounds = m_emptyText.getBounds();
+	const sf::FloatRect bounds = m_emptyText.getLocalBounds();
 	m_emptyText.setPosition(position + sf::Vector2f(
 		SCROLL_WINDOW_LEFT + 0.5f * (SCROLL_WINDOW_WIDTH - bounds.width),
 		SCROLL_WINDOW_TOP + 0.5f * (SCROLL_WINDOW_WIDTH - bounds.height)));
@@ -866,28 +869,30 @@ void Inventory::selectTab(ItemType type) {
 	hideDescription();
 	deselectCurrentSlot();
 	m_currentTab = type;
+	std::string line;
 	switch (type) {
 	case ItemType::Equipment_weapon:
-		m_selectedTabText.setString(g_textProvider->getText("Equipment"));
+		line = g_textProvider->getText("Equipment");
 		break;
 	case ItemType::Consumable:
-		m_selectedTabText.setString(g_textProvider->getText("Consumables"));
+		line = g_textProvider->getText("Consumables");
 		break;
 	case ItemType::Document:
-		m_selectedTabText.setString(g_textProvider->getText("Documents"));
+		line = g_textProvider->getText("Documents");
 		break;
 	case ItemType::Quest:
-		m_selectedTabText.setString(g_textProvider->getText("QuestItems"));
+		line = g_textProvider->getText("QuestItems");
 		break;
 	case ItemType::Key:
-		m_selectedTabText.setString(g_textProvider->getText("Keys"));
+		line = g_textProvider->getText("Keys");
 		break;
 	case ItemType::Misc:
-		m_selectedTabText.setString(g_textProvider->getText("Miscellaneous"));
+		line = g_textProvider->getText("Miscellaneous");
 		break;
 	default:
 		break;
 	}
+	m_selectedTabText.setString(sf::String::fromUtf8(line.begin(), line.end()));
 	// center text
 	m_selectedTabText.setPosition(
 		m_window->getPosition().x +
@@ -913,10 +918,10 @@ void Inventory::reloadGold() {
 	gold.append(": ");
 	gold.append(std::to_string(m_core->getData().gold));
 	gold.append("\n\n");
-	m_goldText.setString(gold);
+	m_goldText.setString(sf::String::fromUtf8(gold.begin(), gold.end()));
 
 	sf::Vector2f pos = m_goldText.getPosition();
-	pos.x += m_goldText.getBounds().width + 0.2f * GUIConstants::TEXT_OFFSET;
+	pos.x += m_goldText.getGlobalBounds().width + 0.2f * GUIConstants::TEXT_OFFSET;
 	pos.y += 0.5f * GUIConstants::CHARACTER_SIZE_M - 13.f;
 	m_goldSprite.setPosition(pos);
 }

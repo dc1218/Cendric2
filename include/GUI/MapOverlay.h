@@ -52,7 +52,7 @@ private:
 	MainCharacter* m_mainChar = nullptr;
 	MapOverlay* m_parent;
 	sf::Vector2f m_waypointPosition;
-	BitmapText m_tooltip;
+	sf::Text m_tooltip;
 };
 
 // a quest marker on the map
@@ -162,7 +162,7 @@ private:
 	sf::FloatRect m_boundingBox;
 	sf::Vector2f m_position;
 
-	BitmapText m_title;
+	sf::Text m_title;
 
 	GUITabBar* m_mapTabBar;
 };

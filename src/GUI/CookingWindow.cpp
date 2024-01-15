@@ -30,7 +30,9 @@ const float CookingWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_COU
 CookingWindow::CookingWindow(MapScreen* screen) : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT) , GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
 	m_screen = screen;
 	m_cookingSprite = sf::Sprite(*(g_resourceManager->getTexture(GlobalResource::TEX_COOKING)));
-	m_title.setString(g_textProvider->getText("Fireplace"));
+	m_title.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	std::string line = g_textProvider->getText("Fireplace");
+	m_title.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setColor(COLOR_LIGHT_PURPLE);
 	
@@ -291,9 +293,7 @@ CookingOption::CookingOption(const std::string& itemID, const std::string& cooke
 		text += " (" + g_textProvider->getText(itemID, "item", false, true) + " " + std::to_string(count)  + ")";
 	}
 
-	std::basic_string<sf::Uint32> utf32line;
-	sf::Utf8::toUtf32(text.begin(), text.end(), std::back_inserter(utf32line));
-	m_text.setString(utf32line);
+	m_text.setString(sf::String::fromUtf8(text.begin(),text.end()));
 	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
 	m_text.setFillColor(COLOR_WHITE);

@@ -33,14 +33,17 @@ BookWindow::BookWindow(const Item& item) : Window(
 	m_rightArrow->setDisabledColor(COLOR_MEDIUM_BROWN);
 	m_rightArrow->setMouseoverColor(COLOR_LIGHT_PURPLE);
 
+	m_title.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setColor(COLOR_DARK_BROWN);
 
+	m_bookTitle.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_bookTitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 	m_bookTitle.setColor(COLOR_MEDIUM_BROWN);
-	m_bookTitle.setTextStyle(TextStyle::Shadowed);
-	m_bookTitle.setTextAlignment(TextAlignment::Center);
+	// m_bookTitle.setTextStyle(TextStyle::Shadowed);
+	// m_bookTitle.setTextAlignment(TextAlignment::Center);
 
+	m_content.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_content.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_content.setColor(COLOR_BLACK);
 
@@ -103,18 +106,21 @@ void BookWindow::setPage(int index) {
 	auto const& page = pages.at(m_currentPage);
 	if (!page->title.empty() && page->content.empty()) {
 		// handle a title page
-		m_bookTitle.setString(g_textProvider->getCroppedText(page->title, "document",
-			GUIConstants::CHARACTER_SIZE_XL, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
+		std::string line = g_textProvider->getCroppedText(page->title, "document",
+			GUIConstants::CHARACTER_SIZE_XL, static_cast<int>(WIDTH - 2 * MARGIN + 10));
+		m_bookTitle.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		m_title.setString("");
 		m_content.setString("");
 	}
 	else {
 		// handle a normal page
-		m_title.setString(g_textProvider->getCroppedText(page->title, "document",
-			GUIConstants::CHARACTER_SIZE_L, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
-		m_content.setString(g_textProvider->getCroppedText(page->content, "document",
-			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
-		m_content.setTextAlignment(page->content_alignment);
+		std::string line = g_textProvider->getCroppedText(page->title, "document",
+			GUIConstants::CHARACTER_SIZE_L, static_cast<int>(WIDTH - 2 * MARGIN + 10));
+		m_title.setString(sf::String::fromUtf8(line.begin(),line.end()));
+		line = g_textProvider->getCroppedText(page->content, "document",
+			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * MARGIN + 10));
+		m_content.setString(sf::String::fromUtf8(line.begin(),line.end()));
+		// m_content.setTextAlignment(page->content_alignment);
 		m_bookTitle.setString("");
 	}
 
@@ -141,13 +147,13 @@ void BookWindow::setPosition(const sf::Vector2f& pos) {
 	m_bookTitle.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_bookTitle.getLocalBounds().width, 0.3f * HEIGHT));
 	m_title.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_title.getLocalBounds().width, GUIConstants::TOP));
 
-	TextAlignment alignment = m_content.getTextAlignment();
-	float contentX = (alignment == TextAlignment::Left) ? MARGIN :
-		(alignment == TextAlignment::Right) ? WIDTH - m_content.getBounds().width - MARGIN :
-		(WIDTH - m_content.getBounds().width) * 0.5f;
-	m_content.setPosition(
-		pos + sf::Vector2f(contentX,
-			m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
+	// TextAlignment alignment = m_content.getTextAlignment();
+	// float contentX = (alignment == TextAlignment::Left) ? MARGIN :
+	// 	(alignment == TextAlignment::Right) ? WIDTH - m_content.getLocalBounds().width - MARGIN :
+	// 	(WIDTH - m_content.getLocalBounds().width) * 0.5f;
+	// m_content.setPosition(
+	// 	pos + sf::Vector2f(contentX,
+	// 		m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
 
 	if (m_showSprite) {
 		m_sprite.setPosition(pos + sf::Vector2f(

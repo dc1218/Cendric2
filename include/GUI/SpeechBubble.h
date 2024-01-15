@@ -32,7 +32,7 @@ private:
 	bool m_isVisible = true;
 	// The height of the speech bubble above its owner, default is 30.f
 	float m_floatingHeight = 30.f;
-	BitmapText m_text;
+	sf::Text m_text;
 
 	SlicedSprite m_mainLayer;
 	SlicedSprite m_ornamentLayer;

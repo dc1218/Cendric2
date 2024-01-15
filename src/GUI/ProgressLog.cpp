@@ -218,9 +218,10 @@ ProgressLogEntry::ProgressLogEntry() {
 	m_fadeOutTimer = TIME_TO_FADE;
 	m_scrollTimer = TIME_TO_SCROLL;
 
-	m_text = new BitmapText();
-	m_text->setTextStyle(TextStyle::Shadowed);
+	m_text = new sf::Text();
+	// m_text->setTextStyle(TextStyle::Shadowed);
 	m_text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_text->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 
 	m_icon = new sf::RectangleShape();
 	m_icon->setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
@@ -240,7 +241,7 @@ ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, cons
 	ProgressLogEntry* entry = new ProgressLogEntry();
 
 	entry->m_text->setColor(color);
-	entry->m_text->setString(str);
+	entry->m_text->setString(sf::String::fromUtf8(str.begin(),str.end()));
 	entry->setAlpha(0.f);
 
 	if (itemID == "gold") {
@@ -263,7 +264,7 @@ ProgressLogEntry* ProgressLogEntry::createQuestEntry(const std::string& str, con
 	ProgressLogEntry* entry = new ProgressLogEntry();
 
 	entry->m_text->setColor(color);
-	entry->m_text->setString(str);
+	entry->m_text->setString(sf::String::fromUtf8(str.begin(),str.end()));
 	entry->setAlpha(0.f);
 
 	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
@@ -276,7 +277,7 @@ ProgressLogEntry* ProgressLogEntry::createReputationEntry(const std::string& str
 	ProgressLogEntry* entry = new ProgressLogEntry();
 
 	entry->m_text->setColor(color);
-	entry->m_text->setString(str);
+	entry->m_text->setString(sf::String::fromUtf8(str.begin(),str.end()));
 
 	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
 	entry->m_icon->setTextureRect(sf::IntRect(50, 0, 25, 25));

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "global.h"
+#include "ResourceManager.h"
+#include "GlobalResource.h"
 #include "GameObjectComponents/GameObjectComponent.h"
 #include "GUI/BitmapText.h"
 #include "World/AnimatedGameObject.h"
@@ -21,7 +23,7 @@ public:
 	void setShowOnTooltipToggle(bool show);
 
 protected:
-	BitmapText m_tooltipText;
+	sf::Text m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;
 	AnimatedGameObject* m_animatedParent;
 	bool m_useInteractiveColor;

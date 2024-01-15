@@ -19,6 +19,7 @@ Checkbox::Checkbox() :
 
 	setBoundingBox(m_background.getLocalBounds());
 	setInputInDefaultView(true);
+	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 }
 
 void Checkbox::onLeftClick() {
@@ -120,7 +121,8 @@ void Checkbox::setTextColor(const sf::Color& color) {
 }
 
 void Checkbox::setText(const std::string& text, const sf::Color& color, int charSize) {
-	m_text = BitmapText(g_textProvider->getText(text));
+	std::string line = g_textProvider->getText(text);
+	m_text.setString(sf::String::fromUtf8(line.begin(),line.end()));//BitmapText(g_textProvider->getText(text));
 
 	setTextColor(color);
 	setCharacterSize(charSize);
@@ -135,7 +137,7 @@ void Checkbox::setText(const std::string& text, int charSize) {
 }
 
 void Checkbox::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
-	m_text = BitmapText(text);
+	m_text.setString(sf::String::fromUtf8(text.begin(),text.end()));//BitmapText(text);
 
 	setTextColor(color);
 	setCharacterSize(charSize);
@@ -164,12 +166,12 @@ void Checkbox::setEnabled(bool enabled) {
 		m_ornament.getColor().g,
 		m_ornament.getColor().b,
 		m_isEnabled ? 255 : 100));
-	m_text.setColorAlpha(m_isEnabled ? 255 : 100);
+	// m_text.setColorAlpha(m_isEnabled ? 255 : 100);
 }
 
 void Checkbox::updateColor() {
 	m_text.setColor(m_isSelected ? COLOR_BRIGHT_PURPLE : COLOR_WHITE);
-	m_text.setColorAlpha(m_isEnabled ? 255 : 100);
+	// m_text.setColorAlpha(m_isEnabled ? 255 : 100);
 
 	m_background.setColor(m_isSelected ? COLOR_MEDIUM_PURPLE : m_backgroundColor);
 }

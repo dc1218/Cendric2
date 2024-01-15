@@ -50,8 +50,8 @@ protected:
 	float m_textPositionPercentage;
 	bool m_isPermanent;
 
-	BitmapText m_title;
-	BitmapText m_subtitle;
+	sf::Text m_title;
+	sf::Text m_subtitle;
 
 	virtual void repositionText();
 

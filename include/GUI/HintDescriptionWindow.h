@@ -24,6 +24,6 @@ private:
 
 	bool m_isVisible = false;
 
-	BitmapText m_titleText;
-	BitmapText m_descriptionText;
+	sf::Text m_titleText;
+	sf::Text m_descriptionText;
 };

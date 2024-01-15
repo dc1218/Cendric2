@@ -42,7 +42,9 @@ void LootWindow::setLoot(const std::map<string, int>& loot, int gold) {
 		lootText.append(std::to_string(gold));
 	}
 
-	m_lootText = new BitmapText(lootText);
+	m_lootText = new sf::Text();//new BitmapText(lootText);
+	m_lootText->setString(sf::String::fromUtf8(lootText.begin(),lootText.end()));
+	m_lootText->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_lootText->setCharacterSize(8);
 	m_lootText->setPosition(getPosition() + TEXT_OFFSET);
 	setHeight(m_lootText->getLocalBounds().height + 18.f);

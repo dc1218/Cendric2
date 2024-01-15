@@ -34,7 +34,7 @@ protected:
 	sf::Sprite m_icon;
 	sf::CircleShape m_background;
 
-	BitmapText m_inputKey;
+	sf::Text m_inputKey;
 
 	sf::Color m_backgroundColor = COLOR_TRANS_BLACK;
 	sf::Color m_selectedColor = COLOR_TRANS_GREY;

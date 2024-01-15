@@ -61,7 +61,7 @@ protected:
 	sf::FloatRect m_outerRect;
 	sf::FloatRect m_innerRect;
 
-	BitmapText m_text;
+	sf::Text m_text;
 
 	sf::Color m_backgroundColor = COLOR_TRANS_BLACK;
 	sf::Color m_activeColor = COLOR_TRANS_GREY;

@@ -12,7 +12,7 @@ const std::string GlobalResource::FONT_8 = "res/font/bitmap_font_8_default.png";
 const std::string GlobalResource::FONT_8_SHADOWED = "res/font/bitmap_font_8_shadowed.png";
 const std::string GlobalResource::FONT_12 = "res/font/bitmap_font_12_default.png";
 const std::string GlobalResource::FONT_12_SHADOWED = "res/font/bitmap_font_12_shadowed.png";
-const std::string GlobalResource::FONT_TTF_DIALOGUE = "res/font/UbuntuMono-B.ttf";
+const std::string GlobalResource::FONT_TTF_DIALOGUE = "res/font/AlimamaDaoLiTi.ttf";
 
 const std::string GlobalResource::TEX_SPLASH_BG = "res/texture/screens/screen_menu_bg.png";
 const std::string GlobalResource::TEX_SPLASH_FG = "res/texture/screens/screen_menu_fg.png";

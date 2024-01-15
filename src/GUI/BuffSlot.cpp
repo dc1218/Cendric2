@@ -45,8 +45,9 @@ BuffSlot::BuffSlot(BuffSlotType buffType, const sf::IntRect& textureLocation) {
 	m_back.setSize(sf::Vector2f(50.f, 50.f));
 	m_back.setFillColor(COLOR_TRANS_GREY);
 
+	m_durationText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_durationText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_durationText.setTextStyle(TextStyle::Shadowed);
+	// m_durationText.setTextStyle(TextStyle::Shadowed);
 	
 	m_tooltipComponent = new TooltipWindowComponent("", this);
 	m_tooltipComponent->setWindowOffset(sf::Vector2f(SIZE + 2.f, 0.f));
@@ -98,7 +99,8 @@ void BuffSlot::update(const sf::Time& frameTime) {
 
 	// update duration text
 	if (m_duration >= sf::Time::Zero) {
-		m_durationText.setString(std::to_string(static_cast<int>(floor(m_duration.asSeconds()))) + "s");
+		std::string line = std::to_string(static_cast<int>(floor(m_duration.asSeconds()))) + "s";
+		m_durationText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		m_durationText.setPosition(getPosition() + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
 	}
 	GameObject::update(frameTime);

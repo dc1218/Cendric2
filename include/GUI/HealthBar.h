@@ -48,7 +48,7 @@ private:
 	sf::RectangleShape m_bar;
 	sf::RectangleShape m_hitOverlay;
 
-	BitmapText m_name;
+	sf::Text m_name;
 
 	float m_borderOffsetX;
 	float m_borderOffsetY;

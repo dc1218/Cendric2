@@ -1,6 +1,7 @@
 #include "Cutscene/Cutscene.h"
 #include "GUI/GUIConstants.h"
 #include "World/GameObject.h"
+#include "GlobalResource.h"
 
 const sf::Vector2f Cutscene::TEXT_OFFSET = sf::Vector2f(100.f, 40.f);
 
@@ -11,10 +12,11 @@ Cutscene::Cutscene(std::string& id) {
 	m_currentStep = -1;
 	if (m_data.id.empty()) return;
 	
+	m_cutsceneText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_cutsceneText.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_cutsceneText.setColor(COLOR_WHITE);
-	m_cutsceneText.setTextStyle(TextStyle::Shadowed);
-	m_cutsceneText.setTextAlignment(TextAlignment::Center);
+	// m_cutsceneText.setTextStyle(TextStyle::Shadowed);
+	// m_cutsceneText.setTextAlignment(TextAlignment::Center);
 
 	// load all textures now
 	for (auto& step : m_data.steps) {
@@ -98,8 +100,9 @@ void Cutscene::setNextText() {
 		m_cutsceneText.setString("");
 	}
 	else {
-		m_cutsceneText.setString(g_textProvider->getCroppedText(text.text, "cutscene",
-			GUIConstants::CHARACTER_SIZE_L, WINDOW_WIDTH - 2 * static_cast<int>(TEXT_OFFSET.x)));
+		std::string line = g_textProvider->getCroppedText(text.text, "cutscene",
+			GUIConstants::CHARACTER_SIZE_L, WINDOW_WIDTH - 2 * static_cast<int>(TEXT_OFFSET.x));
+		m_cutsceneText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	}
 
 	if (text.centered) {

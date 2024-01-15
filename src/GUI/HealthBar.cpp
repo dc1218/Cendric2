@@ -66,9 +66,10 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 
 	setAttributes(attributes);
 
-	m_name.setTextAlignment(TextAlignment::Center);
-	m_name.setTextStyle(TextStyle::Shadowed);
+	// m_name.setTextAlignment(TextAlignment::Center);
+	// m_name.setTextStyle(TextStyle::Shadowed);
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_name.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	setName("");
 
 	setPosition(initialPosition);
@@ -96,7 +97,8 @@ void HealthBar::setAttributes(const AttributeData* attributes) {
 }
 
 void HealthBar::setName(const std::string& name) {
-	m_name.setString(g_textProvider->getCroppedString(name, m_name.getCharacterSize(), static_cast<int>(m_boundingBox.width + 20.f)));
+	std::string line = g_textProvider->getCroppedString(name, m_name.getCharacterSize(), static_cast<int>(m_boundingBox.width + 20.f));
+	m_name.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	setPosition(getPosition());
 }
 
@@ -119,7 +121,7 @@ void HealthBar::setPosition(const sf::Vector2f& pos) {
 	m_bar.setPosition(pos);
 	m_border.setPosition(pos - sf::Vector2f(m_borderOffsetX, m_borderOffsetY));
 	m_hitOverlay.setPosition(pos);
-	auto const bounds = m_name.getBounds();
+	auto const bounds = m_name.getLocalBounds();
 	m_name.setPosition(pos + sf::Vector2f(0.5f * (m_boundingBox.width - bounds.width), BAR_HEIGHT + 10.f));
 }
 

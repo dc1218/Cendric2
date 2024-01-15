@@ -5,6 +5,7 @@
 #include "Enums/EnumNames.h"
 #include "GUI/GUIConstants.h"
 #include "Controller/GamepadMappings/GamepadMappings.h"
+#include "GlobalResource.h"
 
 InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* parent, MainCharacter* mainChar) : 
 	GameObjectComponent(parent), 
@@ -15,7 +16,8 @@ InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* pa
 	m_isFocused = false;
 	m_interactRange = 50.f;
 
-	m_interactText.setTextStyle(TextStyle::Shadowed);
+	m_interactText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	// m_interactText.setTextStyle(TextStyle::Shadowed);
 	m_interactText.setColor(COLOR_GOOD);
 	m_interactText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 
@@ -59,7 +61,7 @@ void InteractComponent::setInteractText(const std::string& textKey) {
 
 	interactString.append(key);
 	interactString.append("> " + g_textProvider->getText(textKey));
-	m_interactText.setString(interactString);
+	m_interactText.setString(sf::String::fromUtf8(interactString.begin(),interactString.end()));
 }
 
 void InteractComponent::setInteractTextColor(const sf::Color& color) {

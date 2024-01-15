@@ -8,8 +8,9 @@ TooltipComponent::TooltipComponent(const std::string& tooltip, AnimatedGameObjec
 	m_useInteractiveColor = useInteractiveColor;
 	m_showOnTooltipToggle = false;
 
+	m_tooltipText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_tooltipText.setString(tooltip);
-	m_tooltipText.setTextStyle(TextStyle::Shadowed);
+	// m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setColor(COLOR_WHITE);
 	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 
@@ -21,7 +22,7 @@ TooltipComponent::TooltipComponent(const std::string& tooltip, GameObject* paren
 	m_animatedParent = nullptr;
 
 	m_tooltipText.setString(tooltip);
-	m_tooltipText.setTextStyle(TextStyle::Shadowed);
+	// m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setColor(COLOR_WHITE);
 	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 
@@ -43,7 +44,7 @@ void TooltipComponent::setTooltipHeight(float height) {
 }
 
 void TooltipComponent::setTooltipText(const std::string& tooltip) {
-	m_tooltipText.setString(tooltip);
+	m_tooltipText.setString(sf::String::fromUtf8(tooltip.begin(),tooltip.end()));
 	setPosition(m_parent->getPosition());
 }
 

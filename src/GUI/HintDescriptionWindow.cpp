@@ -11,10 +11,12 @@ HintDescriptionWindow::HintDescriptionWindow(const CharacterCore* core) : Window
 	GUIConstants::ORNAMENT_COLOR) {
 	m_core = core;
 
+	m_titleText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(COLOR_WHITE);
-	m_titleText.setTextAlignment(TextAlignment::Center);
+	// m_titleText.setTextAlignment(TextAlignment::Center);
 
+	m_descriptionText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_descriptionText.setColor(COLOR_LIGHT_GREY);
 
@@ -28,7 +30,7 @@ void HintDescriptionWindow::reload(const std::string& hintKey) {
 		GUIConstants::CHARACTER_SIZE_M,
 		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
-	m_titleText.setString(title);
+	m_titleText.setString(sf::String::fromUtf8(title.begin(),title.end()));
 
 	std::string description = getHintDescription(hintKey);
 	description = g_textProvider->getCroppedString(
@@ -36,7 +38,7 @@ void HintDescriptionWindow::reload(const std::string& hintKey) {
 		GUIConstants::CHARACTER_SIZE_S,
 		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
-	m_descriptionText.setString(description);
+	m_descriptionText.setString(sf::String::fromUtf8(description.begin(),description.end()));
 
 	setPosition(getPosition());
 }

@@ -62,7 +62,7 @@ protected:
 	sf::Color m_symbolColor;
 	sf::Color m_mouseOverColor;
 	
-	BitmapText m_text;
+	sf::Text m_text;
 
 	static const float SIDE_LENGTH;
 	static const float CENTER_SIZE;

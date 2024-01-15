@@ -28,7 +28,7 @@ public:
 
 private:
 	Window* m_window;
-	BitmapText m_message;
+	sf::Text m_message;
 	Button* m_okButton;
 	Button* m_cancelButton;
 	ButtonGroup* m_buttonGroup;
@@ -36,5 +36,5 @@ private:
 	std::function<void()> m_executeOnOk = NOP;
 
 	std::string m_savegameName;
-	BitmapText m_savegameNameText;
+	sf::Text m_savegameNameText;
 };

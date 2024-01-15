@@ -74,7 +74,7 @@ private:
 	sf::RectangleShape m_back;
 	sf::RectangleShape m_inside;
 
-	BitmapText m_durationText;
+	sf::Text m_durationText;
 
 	std::vector<std::pair<sf::Time, int>> m_damageBeans;
 	void updateDamageBeans(const sf::Time& frameTime);

@@ -52,7 +52,8 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	m_attributes = attributes;
 	m_entries = &m_hintEntries;
 
-	BitmapText name;
+	sf::Text name;
+	name.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	name.setColor(COLOR_WHITE);
 	name.setString("Placeholder");
@@ -71,7 +72,8 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 		}
 
 		name.setPosition(LEFT + 2 * GUIConstants::TEXT_OFFSET, yOffset);
-		name.setString(g_textProvider->getText(LABELS[i]) + ":");
+		std::string line = g_textProvider->getText(LABELS[i]) + ":";
+		name.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		m_nameTexts.push_back(name);
 
 		icon.setTextureRect(sf::IntRect(0, static_cast<int>(i) * 18, 18, 18));
@@ -122,10 +124,12 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	}
 
 	// init title
+	m_title.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_title.setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
 	m_title.setColor(COLOR_WHITE);
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_title.setString(g_textProvider->getText("CharacterInfo"));
+	std::string line = g_textProvider->getText("CharacterInfo");
+	m_title.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_title.setPosition(
 		m_window->getPosition().x +
 		m_window->getSize().x / 2 -
@@ -305,7 +309,8 @@ void CharacterInfo::updateAttributes() {
 	attributes.push_back(std::to_string(currentAttributes.resistanceShadow));
 	attributes.push_back(std::to_string(currentAttributes.resistanceLight));
 
-	BitmapText attributeText;
+	sf::Text attributeText;
+	attributeText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	attributeText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	attributeText.setColor(COLOR_WHITE);
 	attributeText.setString("Placeholder");
@@ -321,7 +326,8 @@ void CharacterInfo::updateAttributes() {
 		}
 
 		attributeText.setPosition(LEFT + WIDTH - 136.f, yOffset);
-		attributeText.setString(attributes[i]);
+		std::string line = attributes[i];
+		attributeText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		m_attributeTexts.push_back(attributeText);
 
 		yOffset += dy;
@@ -360,18 +366,22 @@ void CharacterInfo::updateReputation() {
 	yOffset += 2 * GUIConstants::CHARACTER_SIZE_M;
 
 	if (m_core->getData().reputationProgress.empty()) {
-		BitmapText noRep;
+		sf::Text noRep;
+		noRep.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 		noRep.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		noRep.setPosition(xOffset, yOffset);
 		noRep.setColor(COLOR_LIGHT_PURPLE);
-		noRep.setString(g_textProvider->getCroppedText("NoReputation", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 6 * GUIConstants::TEXT_OFFSET)));
+		std::string line = g_textProvider->getCroppedText("NoReputation", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 6 * GUIConstants::TEXT_OFFSET));
+		noRep.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		m_reputationTexts.push_back(noRep);
 		return;
 	}
 
 	for (auto const& rep : m_core->getData().reputationProgress) {
-		BitmapText title;
-		title.setString(g_textProvider->getText(EnumNames::getFractionIDName(rep.first)) + ": " + std::to_string(rep.second));
+		sf::Text title;
+		title.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+		std::string line = g_textProvider->getText(EnumNames::getFractionIDName(rep.first)) + ": " + std::to_string(rep.second);
+		title.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		title.setPosition(xOffset, yOffset);
 		title.setColor(COLOR_WHITE);
@@ -379,10 +389,12 @@ void CharacterInfo::updateReputation() {
 
 		yOffset += title.getLocalBounds().height * (3 / 2.f);
 
-		BitmapText subtitle;
+		sf::Text subtitle;
+		subtitle.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 		std::string key = EnumNames::getFractionIDName(rep.first) + "_" +
 			(rep.second >= 75 ? "100" : rep.second >= 50 ? "75" : rep.second >= 25 ? "50" : "25");
-		subtitle.setString(g_textProvider->getCroppedText(key, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 6 * GUIConstants::TEXT_OFFSET)));
+		line = g_textProvider->getCroppedText(key, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 6 * GUIConstants::TEXT_OFFSET));
+		subtitle.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		subtitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		subtitle.setPosition(xOffset, yOffset);
 		subtitle.setColor(COLOR_LIGHT_PURPLE);
@@ -445,13 +457,14 @@ void CharacterInfo::hide() {
 
 HintEntry::HintEntry(const std::string& hintKey) {
 	m_hintKey = hintKey;
+	m_name.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	std::string hintTitle = "> " + g_textProvider->getText(hintKey, "hint");
 	if (hintTitle.size() > CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS) {
 		hintTitle = hintTitle.substr(0, CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS - 3) + "...";
 	}
-	m_name.setString(hintTitle);
+	m_name.setString(sf::String::fromUtf8(hintTitle.begin(),hintTitle.end()));
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);

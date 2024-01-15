@@ -20,7 +20,7 @@ public:
 	void setMaxWidth(int maxWidth);
 
 private:
-	BitmapText m_text;
+	sf::Text m_text;
 	sf::Vector2f m_textOffset;
 	int m_maxWidth;
 };

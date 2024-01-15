@@ -63,7 +63,7 @@ private:
 	ScrollHelper *m_scrollHelper = nullptr;
 
 	sf::Sprite m_cookingSprite;
-	BitmapText m_title;
+	sf::Text m_title;
 	std::string m_oldItemID;
 	
 	MapScreen* m_screen = nullptr;

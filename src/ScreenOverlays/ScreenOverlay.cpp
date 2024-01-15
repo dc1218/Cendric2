@@ -23,13 +23,15 @@ void ScreenOverlay::load() {
 	m_scale = (m_fadeTime > sf::Time::Zero) ? 0.f : 1.f;
 	m_title.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
-	m_title.setTextStyle(TextStyle::Shadowed);
-	m_title.setTextAlignment(TextAlignment::Center);
+	m_title.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	// m_title.setTextStyle(TextStyle::Shadowed);
+	// m_title.setTextAlignment(TextAlignment::Center);
 
 	m_subtitle.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_subtitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
-	m_subtitle.setTextStyle(TextStyle::Shadowed);
-	m_subtitle.setTextAlignment(TextAlignment::Center);
+	m_subtitle.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	// m_subtitle.setTextStyle(TextStyle::Shadowed);
+	// m_subtitle.setTextAlignment(TextAlignment::Center);
 
 	m_textPositionPercentage = 0.3f;
 
@@ -81,7 +83,7 @@ void ScreenOverlay::setTitle(const std::string& textKey, const std::string& text
 }
 
 void ScreenOverlay::setTitleRaw(const std::string& text) {
-	m_title.setString(text);
+	m_title.setString(sf::String::fromUtf8(text.begin(),text.end()));
 	repositionText();
 }
 
@@ -99,7 +101,7 @@ void ScreenOverlay::setSubtitle(const std::string& textKey, const std::string& t
 }
 
 void ScreenOverlay::setSubtitleRaw(const std::string& text) {
-	m_subtitle.setString(text);
+	m_subtitle.setString(sf::String::fromUtf8(text.begin(),text.end()));
 	repositionText();
 }
 

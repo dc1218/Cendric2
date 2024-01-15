@@ -6,6 +6,7 @@ TooltipWindow::TooltipWindow() : Window(
 	sf::Color(0, 0, 0, 200),
 	COLOR_WHITE) 
 {
+	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_text.setPosition(getPosition() + m_textOffset);
 	m_textOffset = sf::Vector2f(5.f, 10.f);
@@ -14,7 +15,9 @@ TooltipWindow::TooltipWindow() : Window(
 
 void TooltipWindow::setText(const std::string& text) {
 	std::string cropped = g_textProvider->getCroppedString(text, GUIConstants::CHARACTER_SIZE_S, m_maxWidth);
-	m_text.setString(cropped);
+	std::basic_string<sf::Uint32> utf32line;
+	sf::Utf8::toUtf32(cropped.begin(), cropped.end(), std::back_inserter(utf32line));
+	m_text.setString(utf32line);
 	setHeight(m_text.getLocalBounds().height + 2 * m_textOffset.y);
 	setWidth(m_text.getLocalBounds().width + 2 * m_textOffset.x);
 }
@@ -36,7 +39,7 @@ void TooltipWindow::setTextOffset(const sf::Vector2f& offset) {
 }
 
 void TooltipWindow::setTextAlignment(TextAlignment alignment) {
-	m_text.setTextAlignment(alignment);
+	// m_text.setTextAlignment(alignment);
 }
 
 void TooltipWindow::setMaxWidth(int maxWidth) {

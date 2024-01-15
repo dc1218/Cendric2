@@ -42,7 +42,7 @@ private:
 	sf::Time m_fadeInTimer;
 	sf::Time m_fadeOutTimer;
 	sf::Time m_scrollTimer;
-	BitmapText* m_text = nullptr;
+	sf::Text* m_text = nullptr;
 	sf::RectangleShape* m_icon = nullptr;
 	sf::RectangleShape* m_background = nullptr;
 	sf::RectangleShape* m_border = nullptr;

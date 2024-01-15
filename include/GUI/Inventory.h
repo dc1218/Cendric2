@@ -60,9 +60,9 @@ private:
 	void calculateSlotPositions() const;
 	static bool isSlotInvisible(const InventorySlot* slot);
 
-	BitmapText m_goldText;
-	BitmapText m_selectedTabText;
-	BitmapText m_emptyText;
+	sf::Text m_goldText;
+	sf::Text m_selectedTabText;
+	sf::Text m_emptyText;
 
 	SlicedSprite m_scrollWindow;
 	ScrollBar* m_scrollBar = nullptr;

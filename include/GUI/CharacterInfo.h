@@ -23,7 +23,7 @@ protected:
 	void updateColor() override;
 
 private:
-	BitmapText m_name;
+	sf::Text m_name;
 	std::string m_hintKey;
 };
 
@@ -86,15 +86,15 @@ private:
 	bool m_isReloadNeeded = true;
 
 	TabBar* m_tabBar;
-	BitmapText m_title;
+	sf::Text m_title;
 
 	std::vector<sf::Sprite> m_statIcons;
-	std::vector<BitmapText> m_nameTexts;
-	std::vector<BitmapText> m_attributeTexts;
+	std::vector<sf::Text> m_nameTexts;
+	std::vector<sf::Text> m_attributeTexts;
 
-	BitmapText m_guild;
+	sf::Text m_guild;
 	sf::Sprite m_guildSprite;
-	std::vector<BitmapText> m_reputationTexts;
+	std::vector<sf::Text> m_reputationTexts;
 
 	std::vector<ScrollEntry*> m_hintEntries;
 	std::string m_selectedHintKey = "";

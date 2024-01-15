@@ -168,7 +168,7 @@ void Screen::renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget&
 	}
 }
 
-const BitmapText* Screen::getTooltipText() const {
+const sf::Text* Screen::getTooltipText() const {
 	return &m_tooltipText;
 }
 
@@ -178,9 +178,12 @@ void Screen::setTooltipTextRaw(const std::string& text, const sf::Color& color, 
 		return;
 	}
 	
-	m_tooltipText = BitmapText(g_textProvider->getCroppedString(text, GUIConstants::CHARACTER_SIZE_M, static_cast<int>((m_isTooltipTop ? 0.4f : 0.6f) * WINDOW_WIDTH)));
-	m_tooltipText.setTextStyle(TextStyle::Shadowed);
-	m_tooltipText.setTextAlignment(TextAlignment::Center);
+	// m_tooltipText = BitmapText(g_textProvider->getCroppedString(text, GUIConstants::CHARACTER_SIZE_M, static_cast<int>((m_isTooltipTop ? 0.4f : 0.6f) * WINDOW_WIDTH)));
+	// m_tooltipText.setTextStyle(TextStyle::Shadowed);
+	// m_tooltipText.setTextAlignment(TextAlignment::Center);
+	std::string line = g_textProvider->getCroppedString(text, GUIConstants::CHARACTER_SIZE_M, static_cast<int>((m_isTooltipTop ? 0.4f : 0.6f) * WINDOW_WIDTH));
+	m_tooltipText.setString(sf::String::fromUtf8(line.begin(),line.end()));
+	m_tooltipText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_tooltipText.setPosition(std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().width) / 2.f), m_isTooltipTop ? 12.f : WINDOW_HEIGHT - m_tooltipText.getLocalBounds().height - 12.f);
 	m_tooltipText.setColor(color);

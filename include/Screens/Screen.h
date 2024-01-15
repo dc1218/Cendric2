@@ -33,7 +33,7 @@ public:
 	std::vector<GameObject*>& getToAddObjects();
 
 	// getter for the tooltip text
-	const BitmapText* getTooltipText() const;
+	const sf::Text* getTooltipText() const;
 	// gets the character core that is needed by each screen
 	virtual CharacterCore* getCharacterCore() const;
 
@@ -84,7 +84,7 @@ private:
 	void deleteDisposedObjects();
 	std::vector<std::vector<GameObject*>> m_objects;
 	std::vector<GameObject*> m_toAdd;
-	BitmapText m_tooltipText;
+	sf::Text m_tooltipText;
 
 	sf::Time m_tooltipTime = sf::Time::Zero;
 	bool m_isTooltipTop = false;

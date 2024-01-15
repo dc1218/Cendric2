@@ -28,9 +28,9 @@ private:
 	ArrowButton* m_leftArrow;
 	ArrowButton* m_rightArrow;
 
-	BitmapText m_bookTitle;
-	BitmapText m_title;
-	BitmapText m_content;
+	sf::Text m_bookTitle;
+	sf::Text m_title;
+	sf::Text m_content;
 
 	// -1 is the title page, may be empty.
 	int m_currentPage = -1;

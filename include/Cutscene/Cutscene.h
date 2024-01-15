@@ -24,7 +24,7 @@ public:
 
 private:
 	CutsceneData m_data;
-	BitmapText m_cutsceneText;
+	sf::Text m_cutsceneText;
 	std::vector<sf::Sprite> m_cutsceneImages;
 
 	sf::Time m_currentTextTime = sf::Time::Zero;

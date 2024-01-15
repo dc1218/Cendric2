@@ -19,10 +19,11 @@ GUITabButton::GUITabButton() {
 	GameObject::setDebugBoundingBox(sf::Color::Blue);
 	setInputInDefaultView(true);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE - 2 * OFFSET, SIZE - 2 * OFFSET));
+	m_inputKey.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 }
 
 void GUITabButton::setText(const std::string& text) {
-	m_inputKey.setString(text);
+	m_inputKey.setString(sf::String::fromUtf8(text.begin(),text.end()));
 
 	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().width > SIZE - 10.f) ?
 		GUIConstants::CHARACTER_SIZE_S :

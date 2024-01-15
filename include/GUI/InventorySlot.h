@@ -41,5 +41,5 @@ protected:
 	bool m_isEquipmentOrigin = false;
 	bool m_isSelectedByButtonGroup = false;
 
-	BitmapText m_amountText;
+	sf::Text m_amountText;
 };

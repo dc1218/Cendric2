@@ -31,8 +31,9 @@ MapOverlay::MapOverlay(WorldInterface* interface, GUITabBar* mapTabBar) {
 	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS));
 	m_mainCharMarker.setTextureRect(sf::IntRect(0, 25, 25, 25));
 
+	m_title.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
-	m_title.setTextStyle(TextStyle::Shadowed);
+	// m_title.setTextStyle(TextStyle::Shadowed);
 
 	m_window = new Window(sf::FloatRect(),
 		GUIOrnamentStyle::LARGE,
@@ -150,8 +151,8 @@ void MapOverlay::setMapIndex(int index) {
 		worldName.replace(breakPos, 1, " ");
 		breakPos = worldName.find('\n');
 	}
-	m_title.setString(worldName);
-	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
+	m_title.setString(sf::String::fromUtf8(worldName.begin(),worldName.end()));
+	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getLocalBounds().width) / 2.f, m_boundingBox.top - 24.f));
 
 	m_isOnCurrentMap = (m_screen->getWorldData()->id == map->mapId);
 	m_currentMap = index;
@@ -600,9 +601,11 @@ void WaypointMarker::loadAnimation() {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
+	m_tooltip.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_tooltip.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_tooltip.setTextStyle(TextStyle::Shadowed);
-	m_tooltip.setString(getTooltipString());
+	// m_tooltip.setTextStyle(TextStyle::Shadowed);
+	std::string line = getTooltipString();
+	m_tooltip.setString(sf::String::fromUtf8(line.begin(),line.end()));
 }
 
 std::string WaypointMarker::getTooltipString() const {
@@ -616,7 +619,7 @@ std::string WaypointMarker::getTooltipString() const {
 
 void WaypointMarker::setPosition(const sf::Vector2f& position) {
 	AnimatedGameObject::setPosition(position);
-	m_tooltip.setPosition(position + sf::Vector2f(-0.5f * (m_tooltip.getBounds().width - m_boundingBox.width), -8.f));
+	m_tooltip.setPosition(position + sf::Vector2f(-0.5f * (m_tooltip.getLocalBounds().width - m_boundingBox.width), -8.f));
 }
 
 void WaypointMarker::onMouseOver() {

@@ -16,9 +16,10 @@ static std::string zeroPadNumber(int number, int pad) {
 Stopwatch::Stopwatch(const CharacterCore* core) {
 	m_core = core;
 
+	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_text.setColor(COLOR_WHITE);
-	m_text.setTextStyle(TextStyle::Shadowed);
+	// m_text.setTextStyle(TextStyle::Shadowed);
 
 	m_isAlwaysUpdate = true;
 	m_isInputInDefaultView = true;
@@ -59,10 +60,10 @@ void Stopwatch::update(const sf::Time& frameTime) {
 	std::string stringSeconds = zeroPadNumber(secondsPlayed, 2) + ":";
 	std::string stringMilliSeconds = zeroPadNumber(milliSecondsPlayed, 3);
 	std::string formattedTime = stringHours + stringMinutes + stringSeconds + stringMilliSeconds;
-	m_text.setString(formattedTime);
+	m_text.setString(sf::String::fromUtf8(formattedTime.begin(),formattedTime.end()));
 
 	// center text
-	m_text.setPosition(sf::Vector2f((WINDOW_WIDTH - m_text.getBounds().width) * 0.5f, WINDOW_HEIGHT - 30.f));
+	m_text.setPosition(sf::Vector2f((WINDOW_WIDTH - m_text.getLocalBounds().width) * 0.5f, WINDOW_HEIGHT - 30.f));
 }
 
 GameObjectType Stopwatch::getConfiguredType() const {

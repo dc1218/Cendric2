@@ -30,6 +30,6 @@ private:
 	bool m_isFocused;
 	float m_interactRange;
 	MainCharacter* m_mainChar;
-	BitmapText m_interactText;
+	sf::Text m_interactText;
 	std::function<void()> m_executeOnInteract = NOP;
 };

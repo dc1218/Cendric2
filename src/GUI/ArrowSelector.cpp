@@ -4,7 +4,7 @@ ArrowSelector::ArrowSelector() : GameObject(),
 m_rightArrow(true),
 m_leftArrow(false),
 m_button(sf::FloatRect(0.f, 0.f, 50.f, 50.f)) {
-
+	m_label.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_label.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_button.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	setInputInDefaultView(true);
@@ -108,7 +108,7 @@ void ArrowSelector::setLabelText(const std::string& text) {
 }
 
 void ArrowSelector::setLabelTextRaw(const std::string& text) {
-	m_label.setString(text);
+	m_label.setString(sf::String::fromUtf8(text.begin(),text.end()));
 }
 
 void ArrowSelector::setEnabled(bool enabled) {

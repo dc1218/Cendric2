@@ -479,12 +479,12 @@ public:
 		case GamepadAxis::RightButton3:
 			return "R3";
 		case GamepadAxis::Square:
-			// ¾
+			// ï¿½
 			return getUtf8(0xbe);
 		case GamepadAxis::Circle:
 			return "O";
 		case GamepadAxis::Triangle:
-			// ½
+			// ï¿½
 			return getUtf8(0xbd);
 		case GamepadAxis::A:
 			return "A";
@@ -956,19 +956,19 @@ public:
 			return "?";
 
 		case Key::Move_Up:
-			// ¹
+			// ï¿½
 			return getUtf8(0xb9);
 		
 		case Key::Move_Down:
-			// º
+			// ï¿½
 			return getUtf8(0xba);
 
 		case Key::Move_Left:
-			// »
+			// ï¿½
 			return getUtf8(0xbb);
 
 		case Key::Move_Right:
-			// ¼
+			// ï¿½
 			return getUtf8(0xbc);
 		}
 	}

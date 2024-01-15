@@ -30,7 +30,8 @@ const float DialogueWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_CO
 DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT), GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
 	m_speakerSprite.setTextureRect(sf::IntRect(0, 0, 250, 250));
 
-	m_speakerText = new BitmapText("");
+	m_speakerText = new sf::Text();
+	m_speakerText->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_speakerText->setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_speakerText->setColor(COLOR_LIGHT_PURPLE);
 
@@ -98,7 +99,7 @@ void DialogueWindow::setNPC(NPC* npc) {
 void DialogueWindow::setNPCTalking(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTexture(*g_resourceManager->getTexture(m_npc->getNPCData().dialoguetexture));
-	m_speakerText->setString(m_npcName);
+	m_speakerText->setString(sf::String::fromUtf8(m_npcName.begin(),m_npcName.end()));
 
 	std::string line = g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH), true);
 	std::basic_string<sf::Uint32> utf32line;

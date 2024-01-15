@@ -38,10 +38,12 @@ void MerchantWindow::init() {
 	m_descriptionWindow = new MerchantItemDescriptionWindow(m_interface->getMerchantData());
 
 	// init text
+	m_title.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_title.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET, TOP + GUIConstants::TEXT_OFFSET));
 	m_title.setColor(COLOR_WHITE);
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_title.setString(g_textProvider->getText(removeDigits(m_interface->getMerchantID()), "npc"));
+	std::string line = g_textProvider->getText(removeDigits(m_interface->getMerchantID()), "npc");
+	m_title.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_title.setPosition(
 		m_window->getPosition().x +
 		WIDTH / 2 -

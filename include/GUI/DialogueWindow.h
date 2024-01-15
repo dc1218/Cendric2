@@ -85,7 +85,7 @@ private:
 
 	Dialogue* m_dialogue = nullptr;
 	sf::Text* m_dialogueText = nullptr;
-	BitmapText* m_speakerText = nullptr;
+	sf::Text* m_speakerText = nullptr;
 	MerchantInterface* m_merchantInterface = nullptr;
 
 	// the time it waits from key active to scrolling

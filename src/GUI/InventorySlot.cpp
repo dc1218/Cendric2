@@ -33,6 +33,7 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount, bool isEquip
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
+	m_amountText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	setAmount(amount);
 
 	m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY);
@@ -89,7 +90,8 @@ void InventorySlot::notifySelection() {
 }
 
 void InventorySlot::setAmount(int amount) {
-	m_amountText.setString(amount < 0 ? "" : std::to_string(amount));
+	std::string line = amount < 0 ? "" : std::to_string(amount);
+	m_amountText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	setPosition(getPosition());
 }
 

@@ -20,7 +20,7 @@ TabButton::TabButton(const sf::FloatRect& box) {
 	setDebugBoundingBox(COLOR_BAD);
 
 	m_isActive = false;
-
+	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	setPosition(sf::Vector2f(box.left, box.top));
 }
 
@@ -98,7 +98,8 @@ void TabButton::update(const sf::Time& frameTime) {
 }
 
 void TabButton::setText(const std::string& text, const sf::Color& color, int charSize) {
-	m_text = BitmapText(g_textProvider->getText(text));
+	std::string line = g_textProvider->getText(text);
+	m_text.setString(sf::String::fromUtf8(line.begin(),line.end()));//BitmapText(g_textProvider->getText(text));
 
 	setTextColor(color);
 	setCharacterSize(charSize);
@@ -113,7 +114,7 @@ void TabButton::setText(const std::string& text, int charSize) {
 }
 
 void TabButton::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
-	m_text = BitmapText(text);
+	m_text.setString(sf::String::fromUtf8(text.begin(),text.end()));// = BitmapText(text);
 
 	setTextColor(color);
 	setCharacterSize(charSize);

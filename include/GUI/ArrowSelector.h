@@ -40,7 +40,7 @@ protected:
 
 	ArrowButton m_rightArrow;
 	ArrowButton m_leftArrow;
-	BitmapText m_label;
+	sf::Text m_label;
 
 	Button m_button;
 };

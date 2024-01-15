@@ -38,7 +38,7 @@ private:
 	// reorganizes the positions of the 'm_items' map
 	void calculateSlotPositions();
 
-	BitmapText m_title;
+	sf::Text m_title;
 
 	SlicedSprite m_scrollWindow;
 	ScrollBar* m_scrollBar = nullptr;
