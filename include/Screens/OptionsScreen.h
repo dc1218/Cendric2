@@ -6,7 +6,6 @@
 #include "GUI/Checkbox.h"
 #include "GUI/Slider.h"
 #include "GUI/ArrowSelector.h"
-#include "GUI/BitmapText.h"
 
 class OptionsScreen final : public Screen {
 public:
@@ -19,7 +18,7 @@ public:
 	void execOnExit() override;
 
 private:
-	BitmapText* m_title = nullptr;
+	sf::Text* m_title = nullptr;
 
 	Checkbox* m_soundCheckbox = nullptr;
 	Checkbox* m_quickCastCheckbox = nullptr;

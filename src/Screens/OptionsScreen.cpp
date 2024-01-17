@@ -43,7 +43,10 @@ void OptionsScreen::updateMusicVolume() {
 
 void OptionsScreen::execOnEnter() {
 	// title
-	m_title = new BitmapText(g_textProvider->getText("Options"), TextStyle::Shadowed);
+	m_title = new sf::Text();
+	m_title->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	std::string line = g_textProvider->getText("Options");
+	m_title->setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 30.f));
 

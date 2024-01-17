@@ -25,9 +25,11 @@ void TabBar::init(const sf::FloatRect& box, int numberTabs) {
 	m_activeOverlay = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ACTIVE), COLOR_WHITE, m_tabWidth, box.height);
 	setPosition(sf::Vector2f(box.left, box.top));
 
+	m_leftText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_leftText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_leftText.setColor(COLOR_BRIGHT_PURPLE);
 
+	m_rightText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_rightText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_rightText.setColor(COLOR_BRIGHT_PURPLE);
 

@@ -160,8 +160,9 @@ void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds) {
 	}
 	auto const fps = static_cast<int>(1.f / (sum / FPS_AVERAGE_NR));
 
-	BitmapText fpsText = BitmapText(
-		"FPS: " + std::to_string(fps));
+	sf::Text fpsText;
+	fpsText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	fpsText.setString("FPS: " + std::to_string(fps));
 	fpsText.setColor(COLOR_BAD);
 	fpsText.setPosition(sf::Vector2f(1050.f, 10.f));
 	fpsText.setCharacterSize(16);

@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "World/TileMap.h"
-#include "BitmapText.h"
 #include "Structs/QuestData.h"
 #include "GUI/QuestMarker.h"
 #include "GUI/SelectableWindow.h"

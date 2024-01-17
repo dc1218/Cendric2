@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "Map/MapDynamicTile.h"
-#include "GUI/BitmapText.h"
 
 class WaypointTile final : public MapDynamicTile {
 public:

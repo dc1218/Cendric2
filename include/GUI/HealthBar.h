@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "Structs/AttributeData.h"
-#include "GUI/BitmapText.h"
 #include "World/GameObject.h"
 
 class TooltipWindowComponent;

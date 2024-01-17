@@ -41,7 +41,6 @@ BookWindow::BookWindow(const Item& item) : Window(
 	m_bookTitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 	m_bookTitle.setColor(COLOR_MEDIUM_BROWN);
 	// m_bookTitle.setTextStyle(TextStyle::Shadowed);
-	// m_bookTitle.setTextAlignment(TextAlignment::Center);
 
 	m_content.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_content.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -120,7 +119,6 @@ void BookWindow::setPage(int index) {
 		line = g_textProvider->getCroppedText(page->content, "document",
 			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * MARGIN + 10));
 		m_content.setString(sf::String::fromUtf8(line.begin(),line.end()));
-		// m_content.setTextAlignment(page->content_alignment);
 		m_bookTitle.setString("");
 	}
 
@@ -147,10 +145,6 @@ void BookWindow::setPosition(const sf::Vector2f& pos) {
 	m_bookTitle.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_bookTitle.getLocalBounds().width, 0.3f * HEIGHT));
 	m_title.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_title.getLocalBounds().width, GUIConstants::TOP));
 
-	// TextAlignment alignment = m_content.getTextAlignment();
-	// float contentX = (alignment == TextAlignment::Left) ? MARGIN :
-	// 	(alignment == TextAlignment::Right) ? WIDTH - m_content.getLocalBounds().width - MARGIN :
-	// 	(WIDTH - m_content.getLocalBounds().width) * 0.5f;
 	// m_content.setPosition(
 	// 	pos + sf::Vector2f(contentX,
 	// 		m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));

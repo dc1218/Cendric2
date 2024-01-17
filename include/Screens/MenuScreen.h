@@ -6,7 +6,6 @@
 #include "Screens/SplashScreen.h"
 #include "CharacterCore.h"
 #include "GUI/Button.h"
-#include "GUI/BitmapText.h"
 #include "GUI/YesOrNoForm.h"
 
 namespace particles {
@@ -30,7 +29,7 @@ private:
 	sf::Sprite m_screenSpriteBackground;
 	sf::Sprite m_screenSpriteForeground;
 	sf::Sprite m_logoSprite;
-	BitmapText m_versionText;
+	sf::Text m_versionText;
 
 	particles::TextureParticleSystem* m_ps_left = nullptr;
 	particles::TextureParticleSystem* m_ps_right = nullptr;

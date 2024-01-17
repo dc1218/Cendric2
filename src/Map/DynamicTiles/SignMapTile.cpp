@@ -19,7 +19,6 @@ SignMapTile::SignMapTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	addComponent(m_interactComponent);
 
 	m_tooltipComponent = new TooltipWindowComponent("", this);
-	m_tooltipComponent->setTextAlignment(TextAlignment::Center);
 	m_tooltipComponent->setTextOffset(sf::Vector2f(30.f, 10.f));
 	m_tooltipComponent->setShowOnTooltipToggle(true);
 	addComponent(m_tooltipComponent);

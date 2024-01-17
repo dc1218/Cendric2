@@ -32,6 +32,6 @@ protected:
 	std::vector<TabButton*> m_tabButtons;
 	SlicedSprite m_activeOverlay;
 
-	BitmapText m_leftText;
-	BitmapText m_rightText;
+	sf::Text m_leftText;
+	sf::Text m_rightText;
 };

@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "GUI/Window.h"
-#include "GUI/BitmapText.h"
 #include "GUI/ArrowButton.h"
 
 class MapScreen;

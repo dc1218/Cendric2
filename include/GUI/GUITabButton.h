@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "GUI/ButtonInterface.h"
-#include "GUI/BitmapText.h"
 
 class GUITabButton final : public ButtonInterface {
 public:

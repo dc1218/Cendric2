@@ -14,7 +14,6 @@ HintDescriptionWindow::HintDescriptionWindow(const CharacterCore* core) : Window
 	m_titleText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(COLOR_WHITE);
-	// m_titleText.setTextAlignment(TextAlignment::Center);
 
 	m_descriptionText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);

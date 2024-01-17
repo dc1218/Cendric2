@@ -4,7 +4,6 @@
 #include "ResourceManager.h"
 #include "Screen.h"
 
-#include "GUI/BitmapText.h"
 
 class CreditsScreen final : public Screen {
 public:
@@ -18,8 +17,8 @@ public:
 
 private:
 	sf::Sprite m_screenSprite;
-	BitmapText* m_title = nullptr;
-	BitmapText* m_credits = nullptr;
+	sf::Text* m_title = nullptr;
+	sf::Text* m_credits = nullptr;
 
 	void onBack();
 };

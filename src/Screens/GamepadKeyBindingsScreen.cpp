@@ -102,8 +102,8 @@ void GamepadKeyBindingsScreen::calculateEntryPositions() {
 	float center = 0.5f * WINDOW_WIDTH;
 
 	for (auto& it : m_keyButtons) {
-		BitmapText* keyText = m_keyTexts[it.first];
-		const sf::FloatRect& bbox = keyText->getBounds();
+		sf::Text* keyText = m_keyTexts[it.first];
+		const sf::FloatRect& bbox = keyText->getLocalBounds();
 		keyText->setPosition(sf::Vector2f(center - 4.f * WINDOW_MARGIN - bbox.width, yOffset + 10.f));
 
 		Button* keyButton = m_keyButtons[it.first].first;
@@ -141,7 +141,10 @@ void GamepadKeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
 
 void GamepadKeyBindingsScreen::execOnEnter() {
 	// title
-	m_title = new BitmapText(g_textProvider->getText("Gamepad"), TextStyle::Shadowed);
+	m_title = new sf::Text();
+	m_title->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	std::string line = g_textProvider->getText("Gamepad");
+	m_title->setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_title->setCharacterSize(24);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
 
@@ -151,7 +154,10 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 
 	// init text and button objects once
 	for (auto& it : m_selectedKeys) {
-		BitmapText* keyText = new BitmapText(g_textProvider->getText(EnumNames::getKeyName(it.first)));
+		sf::Text* keyText = new sf::Text();
+		keyText->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+		std::string line = g_textProvider->getText(EnumNames::getKeyName(it.first));
+		keyText->setString(sf::String::fromUtf8(line.begin(),line.end()));
 		keyText->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		m_keyTexts[it.first] = keyText;
 

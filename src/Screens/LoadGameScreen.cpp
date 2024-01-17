@@ -39,9 +39,12 @@ void LoadGameScreen::render(sf::RenderTarget& renderTarget) {
 
 void LoadGameScreen::execOnEnter() {
 	// text
-	m_title = new BitmapText(g_textProvider->getText("LoadGame"), TextStyle::Shadowed);
+	m_title = new sf::Text();
+	m_title->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	std::string line = g_textProvider->getText("LoadGame");
+	m_title->setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_title->setCharacterSize(24);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getBounds().width) / 2.f, 25.f));
+	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
 
 	const auto buttonWidth = 200.f;
 	const auto buttonHeight = 50.f;

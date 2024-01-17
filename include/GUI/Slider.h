@@ -5,7 +5,6 @@
 #include "ResourceManager.h"
 
 #include "GUI/ButtonInterface.h"
-#include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 #include "GUI/GUIConstants.h"
 
@@ -77,9 +76,9 @@ protected:
 
 	std::string m_title;
 	std::string m_unit;
-	BitmapText m_titleText;
-	BitmapText m_maxText;
-	BitmapText m_minText;
+	sf::Text m_titleText;
+	sf::Text m_maxText;
+	sf::Text m_minText;
 
 	static const float HEIGHT;
 	static const float WIDTH;

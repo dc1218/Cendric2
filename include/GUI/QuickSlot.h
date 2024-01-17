@@ -3,7 +3,6 @@
 #include "global.h"
 #include "Slot.h"
 
-#include "GUI/BitmapText.h"
 #include "Enums/EnumNames.h"
 
 class CharacterCore;
@@ -48,6 +47,6 @@ private:
 	std::string m_itemID = "";
 	Key m_key;
 
-	BitmapText m_amountText;
-	BitmapText m_keyText;
+	sf::Text m_amountText;
+	sf::Text m_keyText;
 };

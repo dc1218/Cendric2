@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "GUI/Window.h"
-#include "GUI/BitmapText.h"
 #include "TextProvider.h"
 #include "Structs/QuestData.h"
 #include "CharacterCore.h"
@@ -27,11 +26,11 @@ private:
 
 	bool m_isVisible = false;
 
-	BitmapText m_titleText;
-	BitmapText m_descriptionText;
-	BitmapText m_stateText;
+	sf::Text m_titleText;
+	sf::Text m_descriptionText;
+	sf::Text m_stateText;
 
-	std::vector<BitmapText> m_conditionTexts;
-	std::vector<BitmapText> m_targetsTexts;
-	std::vector<BitmapText> m_collectiblesTexts;
+	std::vector<sf::Text> m_conditionTexts;
+	std::vector<sf::Text> m_targetsTexts;
+	std::vector<sf::Text> m_collectiblesTexts;
 };

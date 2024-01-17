@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "GUI/Window.h"
-#include "GUI/BitmapText.h"
 #include "CharacterCore.h"
 #include "GUI/CharacterInfo.h"
 

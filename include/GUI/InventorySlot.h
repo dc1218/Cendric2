@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "Slot.h"
-#include "GUI/BitmapText.h"
 #include "World/Item.h"
 
 class InventorySlot final : public virtual Slot {

@@ -4,7 +4,6 @@
 #include "ResourceManager.h"
 #include "GlobalResource.h"
 #include "GameObjectComponents/GameObjectComponent.h"
-#include "GUI/BitmapText.h"
 #include "World/AnimatedGameObject.h"
 
 // A game object component that holds a tooltip text

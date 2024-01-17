@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "Map/MapDynamicTile.h"
-#include "GUI/BitmapText.h"
 
 // a readable book, starting the book interface when clicked
 class BookTile final : public MapDynamicTile {

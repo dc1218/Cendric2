@@ -5,7 +5,6 @@
 #include "ResourceManager.h"
 
 #include "GUI/ButtonInterface.h"
-#include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 
 // A simple checkbox 

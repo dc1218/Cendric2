@@ -31,15 +31,18 @@ void WeaponWindow::reload() {
 	m_weapon = m_core->getWeapon();
 	if (m_weapon == nullptr) {
 		m_weaponSlot = new InventorySlot(g_resourceManager->getTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS), sf::Vector2i(0, 0), ItemType::Equipment_weapon);
-		m_weaponName.setString(g_textProvider->getText("NoWeapon"));
+		std::string line = g_textProvider->getText("NoWeapon");
+		m_weaponName.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	}
 	else {
 		m_weaponSlot = new InventorySlot(m_weapon->getID(), -1);
-		m_weaponName.setString(g_textProvider->getCroppedText(m_weapon->getID(), "item", GUIConstants::CHARACTER_SIZE_M,
-			static_cast<int>(WIDTH - (2 * GUIConstants::TEXT_OFFSET + 2.f * MARGIN + InventorySlot::SIZE))));
+		std::string line = g_textProvider->getCroppedText(m_weapon->getID(), "item", GUIConstants::CHARACTER_SIZE_M,
+			static_cast<int>(WIDTH - (2 * GUIConstants::TEXT_OFFSET + 2.f * MARGIN + InventorySlot::SIZE)));
+		m_weaponName.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	}
 	m_weaponSlot->setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET, TOP + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET));
-	m_weaponName.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + 2.f * MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET + 0.5f * (InventorySlot::SIZE - m_weaponName.getBounds().height)));
+	m_weaponName.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + 2.f * MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET + 
+		0.5f * (InventorySlot::SIZE - m_weaponName.getLocalBounds().height)));
 
 	clearAllSlots();
 
@@ -52,8 +55,9 @@ void WeaponWindow::reload() {
 	float yOffset = TOP + Spellbook::SPELL_OFFSET;
 	int slotNr = 0;
 	if (m_weapon->getWeaponSlots().empty()) {
-		m_noSlotsText.setString(g_textProvider->getCroppedText("EquipWeapon", GUIConstants::CHARACTER_SIZE_M,
-			static_cast<int>(WIDTH - (GUIConstants::TEXT_OFFSET + SpellSlot::ICON_OFFSET))));
+		std::string line = g_textProvider->getCroppedText("EquipWeapon", GUIConstants::CHARACTER_SIZE_M,
+			static_cast<int>(WIDTH - (GUIConstants::TEXT_OFFSET + SpellSlot::ICON_OFFSET)));
+		m_noSlotsText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		reloadButtonGroup();
 		return;
 	}
@@ -146,9 +150,11 @@ void WeaponWindow::init() {
 	m_spellDesc = new SpellDescriptionWindow();
 	m_spellDesc->setPosition(sf::Vector2f(LEFT + WIDTH + MARGIN, TOP));
 
+	m_weaponName.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_weaponName.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_weaponName.setColor(COLOR_WHITE);
 
+	m_noSlotsText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_noSlotsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_noSlotsText.setColor(COLOR_WHITE);
 	m_noSlotsText.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET / 2.f + SpellSlot::ICON_OFFSET, TOP + Spellbook::SPELL_OFFSET));

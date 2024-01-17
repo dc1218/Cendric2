@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "GameObjectComponents/GameObjectComponent.h"
-#include "GUI/BitmapText.h"
 #include "GUI/TooltipWindow.h"
 
 // A game object component that holds a tooltip in a window
@@ -17,7 +16,6 @@ public:
 	void setMaxWidth(int width);
 	void setTooltipTime(const sf::Time& time);
 	void setCurrentTooltipTime(const sf::Time& time);
-	void setTextAlignment(TextAlignment alignment);
 	void setTextOffset(const sf::Vector2f& offset);
 	void setTooltipText(const std::string& tooltip);
 	void setShowOnTooltipToggle(bool show);

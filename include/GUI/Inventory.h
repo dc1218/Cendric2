@@ -8,7 +8,6 @@
 #include "GUI/TexturedTabBar.h"
 #include "GUI/InventoryEquipment.h"
 #include "GUI/SelectableWindow.h"
-#include "GUI/BitmapText.h"
 
 class LevelInterface;
 class MapInterface;

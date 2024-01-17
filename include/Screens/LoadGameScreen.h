@@ -5,7 +5,6 @@
 #include "Screen.h"
 
 #include "GUI/Button.h"
-#include "GUI/BitmapText.h"
 #include "GUI/SaveGameWindow.h"
 #include "GUI/YesOrNoForm.h"
 
@@ -24,7 +23,7 @@ private:
 	void setAllButtonsEnabled(bool value) override;
 	Button* m_loadSaveGameButton = nullptr;
 	Button* m_deleteSaveGameButton = nullptr;
-	BitmapText* m_title = nullptr;
+	sf::Text* m_title = nullptr;
 	SaveGameWindow* m_saveGameWindow = nullptr;
 
 	YesOrNoForm* m_yesOrNoForm = nullptr;

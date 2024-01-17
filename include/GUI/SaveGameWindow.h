@@ -3,7 +3,6 @@
 #include "global.h"
 #include "Window.h"
 
-#include "GUI/BitmapText.h"
 #include "GUI/ScrollWindow.h"
 
 // a save game entry in a save game window
@@ -30,9 +29,9 @@ private:
 	void setColor(const sf::Color& color);
 
 	bool m_isHashValid = false;
-	BitmapText m_dateSaved;
-	BitmapText m_name;
-	BitmapText m_timePlayed;
+	sf::Text m_dateSaved;
+	sf::Text m_name;
+	sf::Text m_timePlayed;
 
 	std::string m_filename;
 	std::time_t m_dateSavedNr;
@@ -74,7 +73,7 @@ private:
 	bool m_isChosen = false;
 	bool m_isEnabled = true;
 
-	BitmapText m_emptyText;
+	sf::Text m_emptyText;
 
 	static const int ENTRY_COUNT;
 	static const float WINDOW_MARGIN;

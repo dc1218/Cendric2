@@ -61,12 +61,10 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 	m_shrinkTime = sf::Time::Zero;
 
 	m_tooltipComponent = new TooltipWindowComponent("", this);
-	m_tooltipComponent->setTextAlignment(TextAlignment::Center);
 	addComponent(m_tooltipComponent);
 
 	setAttributes(attributes);
 
-	// m_name.setTextAlignment(TextAlignment::Center);
 	// m_name.setTextStyle(TextStyle::Shadowed);
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_name.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));

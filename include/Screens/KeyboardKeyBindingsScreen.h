@@ -6,7 +6,6 @@
 #include "GUI/ButtonGroup.h"
 #include "GUI/SlicedSprite.h"
 #include "GUI/ScrollBar.h"
-#include "GUI/BitmapText.h"
 #include "Enums/EnumNames.h"
 
 class ScrollBar;
@@ -38,13 +37,13 @@ private:
 	void onReset();
 
 private:
-	BitmapText* m_title = nullptr;
+	sf::Text* m_title = nullptr;
 
 	Key m_selectedKey = Key::VOID;
 
 	ButtonGroup* m_keyButtonGroup;
 	std::map<Key, std::pair<Button*, sf::Keyboard::Key>> m_keyButtons;
-	std::map<Key, BitmapText*> m_keyTexts;
+	std::map<Key, sf::Text*> m_keyTexts;
 
 	std::map<Key, sf::Keyboard::Key> m_selectedKeys;
 

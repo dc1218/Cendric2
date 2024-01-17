@@ -16,7 +16,6 @@ Cutscene::Cutscene(std::string& id) {
 	m_cutsceneText.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_cutsceneText.setColor(COLOR_WHITE);
 	// m_cutsceneText.setTextStyle(TextStyle::Shadowed);
-	// m_cutsceneText.setTextAlignment(TextAlignment::Center);
 
 	// load all textures now
 	for (auto& step : m_data.steps) {

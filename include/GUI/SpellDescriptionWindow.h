@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "GUI/Window.h"
-#include "GUI/BitmapText.h"
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
 #include "Structs/SpellData.h"
@@ -29,9 +28,9 @@ private:
 	bool m_isVisible = false;
 	static std::string getGamepadText(const std::string& textKey, Key key);
 
-	BitmapText m_titleText;
-	BitmapText m_descriptionText;
-	BitmapText m_whiteText;
-	BitmapText m_coloredText;
-	BitmapText m_interactionText;
+	sf::Text m_titleText;
+	sf::Text m_descriptionText;
+	sf::Text m_whiteText;
+	sf::Text m_coloredText;
+	sf::Text m_interactionText;
 };

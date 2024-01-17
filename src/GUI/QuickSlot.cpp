@@ -21,8 +21,11 @@ QuickSlot::QuickSlot(WorldInterface* _interface, Key key, const std::string& ite
 	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
 
+	m_amountText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
+
+	m_keyText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 
 	m_backgroundRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
 	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
@@ -55,7 +58,7 @@ void QuickSlot::reloadKey() {
 			"";
 	}
 
-	m_keyText.setString(keyText);
+	m_keyText.setString(sf::String::fromUtf8(keyText.begin(),keyText.end()));
 	m_keyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	if (m_keyText.getLocalBounds().width > SIZE - 10.f) {
 		m_keyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);

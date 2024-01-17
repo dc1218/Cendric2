@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "World/AnimatedGameObject.h"
-#include "GUI/BitmapText.h"
 #include "ResourceManager.h"
 
 class MovingParent;
@@ -55,5 +54,5 @@ protected:
 	bool m_isLockedRelativeVelocityY = false;
 
 	// debug info
-	BitmapText* m_debugInfo = nullptr;
+	sf::Text* m_debugInfo = nullptr;
 };

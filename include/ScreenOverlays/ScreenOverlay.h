@@ -1,7 +1,6 @@
 #pragma once
 
 #include "global.h"
-#include "GUI/BitmapText.h"
 #include "World/GameObject.h"
 #include "ResourceManager.h"
 #include "Enums/FractionID.h"

@@ -83,7 +83,9 @@ void MenuScreen::execOnEnter() {
 		SplashScreen::loadFireParticles(m_ps_right, sf::Vector2f(1130.f, 330.f));
 	}
 	// add version nr
-	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
+	m_versionText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	std::string line = "Cendric v" + std::string(CENDRIC_VERSION_NR);
+	m_versionText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_versionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_versionText.setColor(COLOR_WHITE);
 	m_versionText.setPosition(

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "global.h"
+#include "ResourceManager.h"
+#include "GlobalResource.h"
 
 enum class DamageNumberType {
 	Damage,
@@ -9,13 +11,12 @@ enum class DamageNumberType {
 	HealOverTime
 };
 
-class BitmapText;
 
 struct DamageNumberData final {
 	bool active;
 	float startPosition;
 	float time;
-	BitmapText* text;
+	sf::Text* text;
 };
 
 class DamageNumbers final {

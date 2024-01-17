@@ -122,7 +122,7 @@ void Checkbox::setTextColor(const sf::Color& color) {
 
 void Checkbox::setText(const std::string& text, const sf::Color& color, int charSize) {
 	std::string line = g_textProvider->getText(text);
-	m_text.setString(sf::String::fromUtf8(line.begin(),line.end()));//BitmapText(g_textProvider->getText(text));
+	m_text.setString(sf::String::fromUtf8(line.begin(),line.end()));
 
 	setTextColor(color);
 	setCharacterSize(charSize);
@@ -137,7 +137,7 @@ void Checkbox::setText(const std::string& text, int charSize) {
 }
 
 void Checkbox::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
-	m_text.setString(sf::String::fromUtf8(text.begin(),text.end()));//BitmapText(text);
+	m_text.setString(sf::String::fromUtf8(text.begin(),text.end()));
 
 	setTextColor(color);
 	setCharacterSize(charSize);

@@ -9,13 +9,15 @@ QuestDescriptionWindow::QuestDescriptionWindow(const CharacterCore* core) : Wind
 	GUIConstants::ORNAMENT_COLOR) {
 	m_core = core;
 
+	m_titleText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(COLOR_WHITE);
-	m_titleText.setTextAlignment(TextAlignment::Center);
 
+	m_descriptionText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_descriptionText.setColor(COLOR_LIGHT_GREY);
 
+	m_stateText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_stateText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_stateText.setColor(COLOR_LIGHT_PURPLE);
 
@@ -28,8 +30,9 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 	m_targetsTexts.clear();
 	const QuestData* data = m_core->getQuestData(questID);
 	if (data == nullptr) {
-		m_titleText.setString(g_textProvider->getText("Unknown"));
-		m_descriptionText.setString(g_textProvider->getText("Unknown"));
+		std::string line = g_textProvider->getText("Unknown");
+		m_titleText.setString(sf::String::fromUtf8(line.begin(),line.end()));
+		m_descriptionText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		setPosition(getPosition());
 		return;
 	}
@@ -38,7 +41,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		questID, "quest",
 		GUIConstants::CHARACTER_SIZE_M,
 		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
-	m_titleText.setString(title);
+	m_titleText.setString(sf::String::fromUtf8(title.begin(),title.end()));
 	
 
 	std::string description = g_textProvider->getCroppedText(
@@ -57,7 +60,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		}
 	}
 
-	m_descriptionText.setString(description);
+	m_descriptionText.setString(sf::String::fromUtf8(description.begin(),description.end()));
 
 	QuestState currentState = m_core->getQuestState(questID);
 	std::string state = g_textProvider->getCroppedText(
@@ -66,11 +69,11 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
 	if (currentState == QuestState::Completed) {
-		m_stateText.setString(state);
+		m_stateText.setString(sf::String::fromUtf8(state.begin(),state.end()));
 		m_stateText.setColor(COLOR_GOOD);
 	}
 	else if (currentState == QuestState::Failed) {
-		m_stateText.setString(state);
+		m_stateText.setString(sf::String::fromUtf8(state.begin(),state.end()));
 		m_stateText.setColor(COLOR_BAD);
 	}
 	else {
@@ -90,9 +93,10 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		target.append(std::to_string(progress) + "/" + std::to_string(goal));
 		target = g_textProvider->getCroppedString(target, GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
-		BitmapText targetText;
+		sf::Text targetText;
+		targetText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 		targetText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-		targetText.setString(target);
+		targetText.setString(sf::String::fromUtf8(target.begin(),target.end()));
 		targetText.setColor(progress == 0 ? COLOR_BAD : progress >= goal ? COLOR_GOOD : COLOR_NEUTRAL);
 		
 		m_targetsTexts.push_back(targetText);
@@ -113,15 +117,17 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		collectible.append(std::to_string(progress) + "/" + std::to_string(goal));
 		collectible = g_textProvider->getCroppedString(collectible, GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
-		BitmapText collectibleText;
+		sf::Text collectibleText;
+		collectibleText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 		collectibleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-		collectibleText.setString(collectible);
+		collectibleText.setString(sf::String::fromUtf8(collectible.begin(),collectible.end()));
 		collectibleText.setColor(progress == 0 ? COLOR_BAD : progress >= goal ? COLOR_GOOD : COLOR_NEUTRAL);
 		m_collectiblesTexts.push_back(collectibleText);
 	}
 
 	for (auto& it : data->conditions) {
-		BitmapText conditionText;
+		sf::Text conditionText;
+		conditionText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 
 		std::string condition = "";
 		condition.append(g_textProvider->getText(it, "quest_condition"));
@@ -141,7 +147,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		condition = g_textProvider->getCroppedString(condition, GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
 		conditionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-		conditionText.setString(condition);
+		conditionText.setString(sf::String::fromUtf8(condition.begin(),condition.end()));
 		m_conditionTexts.push_back(conditionText);
 	}
 
@@ -169,22 +175,22 @@ void QuestDescriptionWindow::setPosition(const sf::Vector2f& position) {
 
 	pos.y += GUIConstants::TEXT_OFFSET + m_descriptionText.getLocalBounds().height;
 
-	if (!m_stateText.getString().empty()) {
+	if (!m_stateText.getString().isEmpty()) {
 		m_stateText.setPosition(pos.x, pos.y);
 		pos.y += GUIConstants::TEXT_OFFSET + m_stateText.getLocalBounds().height;
 	}
 
 	for (auto& it : m_targetsTexts) {
 		it.setPosition(pos.x, pos.y);
-		pos.y += 2 * it.getBounds().height;
+		pos.y += 2 * it.getLocalBounds().height;
 	}
 	for (auto& it : m_collectiblesTexts) {
 		it.setPosition(pos.x, pos.y);
-		pos.y += 2 * it.getBounds().height;
+		pos.y += 2 * it.getLocalBounds().height;
 	}
 	for (auto& it : m_conditionTexts) {
 		it.setPosition(pos.x, pos.y);
-		pos.y += 2 * it.getBounds().height;
+		pos.y += 2 * it.getLocalBounds().height;
 	}
 	pos.y += GUIConstants::TEXT_OFFSET;
 

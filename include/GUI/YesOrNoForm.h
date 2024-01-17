@@ -6,7 +6,6 @@
 #include "ResourceManager.h"
 #include "GUI/ButtonGroup.h"
 #include "GUI/Window.h"
-#include "GUI/BitmapText.h"
 
 // A form with two buttons on it, a Yes and a No button.
 // The form is responsible for these two buttons (create, update, render, delete), they are NOT added to the screen objects, only the form is
@@ -29,7 +28,7 @@ public:
 
 private:
 	Window* m_window;
-	BitmapText m_message;
+	sf::Text m_message;
 	ButtonGroup* m_buttonGroup;
 	Button* m_yesButton;
 	Button* m_noButton;

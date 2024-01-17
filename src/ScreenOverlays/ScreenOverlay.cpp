@@ -25,13 +25,11 @@ void ScreenOverlay::load() {
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
 	m_title.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	// m_title.setTextStyle(TextStyle::Shadowed);
-	// m_title.setTextAlignment(TextAlignment::Center);
 
 	m_subtitle.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_subtitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 	m_subtitle.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	// m_subtitle.setTextStyle(TextStyle::Shadowed);
-	// m_subtitle.setTextAlignment(TextAlignment::Center);
 
 	m_textPositionPercentage = 0.3f;
 

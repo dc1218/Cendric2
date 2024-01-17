@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include "Beans/DatabaseBean.h"
-#include "GUI/BitmapText.h"
 
 // an item document page bean, directly from the database
 struct ItemDocumentPageBean final : DatabaseBean {
@@ -11,5 +10,4 @@ struct ItemDocumentPageBean final : DatabaseBean {
 	std::string title;
 	std::string content;
 	std::string texture_path;
-	TextAlignment content_alignment;
 };

@@ -21,18 +21,23 @@ SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
+	m_titleText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(COLOR_WHITE);
 
+	m_descriptionText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_descriptionText.setColor(COLOR_LIGHT_GREY);
 
+	m_whiteText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_whiteText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_coloredText.setColor(COLOR_WHITE);
+	m_whiteText.setColor(COLOR_WHITE);
 
+	m_coloredText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_coloredText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_coloredText.setColor(COLOR_LIGHT_PURPLE);
 
+	m_interactionText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_interactionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_interactionText.setColor(COLOR_NEUTRAL);
 }
@@ -50,8 +55,10 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 
 	delete creator;
 
-	m_titleText.setString(g_textProvider->getText(EnumNames::getSpellIDName(bean.id)));
-	m_descriptionText.setString(g_textProvider->getCroppedText(EnumNames::getSpellIDName(bean.id) + "Desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
+	std::string line = g_textProvider->getText(EnumNames::getSpellIDName(bean.id));
+	m_titleText.setString(sf::String::fromUtf8(line.begin(),line.end()));
+	line = g_textProvider->getCroppedText(EnumNames::getSpellIDName(bean.id) + "Desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
+	m_descriptionText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 
 	int lines = 0;
 	std::string white = "";
@@ -184,9 +191,9 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 			getGamepadText("ToEquip", Key::Interact);
 	}
 
-	m_whiteText.setString(white);
-	m_coloredText.setString(colored);
-	m_interactionText.setString(interactionText);
+	m_whiteText.setString(sf::String::fromUtf8(white.begin(),white.end()));
+	m_coloredText.setString(sf::String::fromUtf8(colored.begin(),colored.end()));
+	m_interactionText.setString(sf::String::fromUtf8(interactionText.begin(),interactionText.end()));
 
 	float height = GUIConstants::TEXT_OFFSET;
 	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;

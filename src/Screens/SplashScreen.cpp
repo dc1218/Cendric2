@@ -28,7 +28,9 @@ SplashScreen::~SplashScreen() {
 
 void SplashScreen::execOnEnter() {
 	// add version nr
-	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
+	m_versionText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	std::string line = "Cendric v" + std::string(CENDRIC_VERSION_NR);
+	m_versionText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_versionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_versionText.setColor(COLOR_WHITE);
 	m_versionText.setPosition(

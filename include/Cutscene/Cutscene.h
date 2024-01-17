@@ -5,7 +5,6 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 
-#include "GUI/BitmapText.h"
 #include "Structs/CutsceneData.h"
 #include "Cutscene/CutsceneLoader.h"
 

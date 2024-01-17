@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "GUI/Window.h"
-#include "GUI/BitmapText.h"
 #include "GUI/GUIConstants.h"
 #include "Structs/NPCData.h"
 #include "Screens/WorldScreen.h"

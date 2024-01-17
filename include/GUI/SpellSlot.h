@@ -3,7 +3,6 @@
 #include "global.h"
 #include "Slot.h"
 
-#include "GUI/BitmapText.h"
 #include "GUI/CooldownRectangleShape.h"
 #include "Structs/SpellData.h"
 #include "ResourceManager.h"
@@ -63,7 +62,7 @@ private:
 
 	CooldownRectangleShape m_cooldownRect;
 	sf::RectangleShape m_lockedRect;
-	BitmapText m_inputKey;
+	sf::Text m_inputKey;
 	std::vector<sf::RectangleShape> m_gems;
 
 	bool m_animating = false;

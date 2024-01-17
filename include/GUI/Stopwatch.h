@@ -4,7 +4,6 @@
 #include "GUI/Window.h"
 #include "TextProvider.h"
 #include "ResourceManager.h"
-#include "GUI/BitmapText.h"
 
 class CharacterCore;
 

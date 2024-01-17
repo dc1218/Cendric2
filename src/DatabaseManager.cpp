@@ -473,7 +473,6 @@ std::vector<DatabaseBean*> DatabaseManager::getItemDocumentPageBeans(const std::
 				bean->title = std::string((char*)sqlite3_column_text(statement, 2));
 				bean->content = std::string((char*)sqlite3_column_text(statement, 3));
 				bean->texture_path = std::string((char*)sqlite3_column_text(statement, 4));
-				bean->content_alignment = resolveTextAlignment((char*)sqlite3_column_text(statement, 5));
 				beans.push_back(bean);
 			}
 			else {

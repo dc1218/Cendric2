@@ -47,7 +47,7 @@ private:
 	void setupQuestMarker(bool isActiveQuest, WorldInterface* interface);
 	void updateColor() override;
 
-	BitmapText m_name;
+	sf::Text m_name;
 
 	QuestData m_data;
 	QuestMarker* m_questMarker = nullptr;
@@ -90,8 +90,8 @@ private:
 	void updateSelectableWindow();
 	void updateTabBar(const sf::Time& frameTime);
 
-	BitmapText m_title;
-	BitmapText m_emptyText;
+	sf::Text m_title;
+	sf::Text m_emptyText;
 
 	TabBar* m_tabBar;
 

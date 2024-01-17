@@ -3,7 +3,6 @@
 #include "global.h"
 #include "World/GameObject.h"
 
-#include "GUI/BitmapText.h"
 #include "Enums/SpellID.h"
 #include "Structs/AttributeData.h"
 #include "Structs/DamageOverTimeData.h"

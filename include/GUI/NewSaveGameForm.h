@@ -5,7 +5,6 @@
 #include "ResourceManager.h"
 #include "GUI/Button.h"
 #include "GUI/Window.h"
-#include "GUI/BitmapText.h"
 #include "GUI/ButtonGroup.h"
 
 // A form with two buttons on it, an ok and a cancel button.

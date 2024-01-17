@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ScreenOverlays/TextureScreenOverlay.h"
-#include "GUI/BitmapText.h"
 #include "GUI/InventorySlot.h"
 
 class EnemyDefeatedScreenOverlay final : public TextureScreenOverlay {
@@ -16,5 +15,5 @@ public:
 
 private:
 	std::vector<InventorySlot*> m_items;
-	std::vector<BitmapText*> m_texts;
+	std::vector<sf::Text*> m_texts;
 };

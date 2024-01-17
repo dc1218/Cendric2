@@ -42,9 +42,11 @@ SaveGameWindow::SaveGameWindow() {
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT, TOP));
 
 	// init empty text
+	m_emptyText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_emptyText.setString(g_textProvider->getText("NoSaves"));
-	const sf::FloatRect bounds = m_emptyText.getBounds();
+	std::string line = g_textProvider->getText("NoSaves");
+	m_emptyText.setString(sf::String::fromUtf8(line.begin(),line.end()));
+	const sf::FloatRect bounds = m_emptyText.getLocalBounds();
 	m_emptyText.setPosition(LEFT + 0.5f * (WIDTH - bounds.width), TOP + 0.5f * (HEIGHT - bounds.height));
 
 	// init scrolling
@@ -182,6 +184,10 @@ std::string SaveGameWindow::getChosenSaveName() const {
 // <<< SaveGameEntry >>>
 
 SaveGameEntry::SaveGameEntry() {
+	m_dateSaved.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	m_name.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	m_timePlayed.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+
 	m_dateSaved.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_timePlayed.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -204,7 +210,7 @@ bool SaveGameEntry::load(const std::string& filename) {
 	strftime(buff, 20, "%Y-%m-%d %H:%M:%S", localtime(&data.dateSaved));
 	m_dateSaved.setString(std::string(buff));
 	m_dateSavedNr = data.dateSaved;
-	m_name.setString(data.saveGameName);
+	m_name.setString(sf::String::fromUtf8(data.saveGameName.begin(),data.saveGameName.end()));
 
 	// format time played
 	auto secondsPlayed = static_cast<int>(data.timePlayed.asSeconds());

@@ -4,7 +4,6 @@
 #include "Screen.h"
 
 #include "GUI/Button.h"
-#include "GUI/BitmapText.h"
 
 class KeyBindingsScreen final : public Screen {
 public:
@@ -22,5 +21,5 @@ private:
 	void onGamepadKeyBindings();
 
 private:
-	BitmapText* m_title = nullptr;
+	sf::Text* m_title = nullptr;
 };

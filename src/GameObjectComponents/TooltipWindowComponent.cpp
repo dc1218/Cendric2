@@ -14,10 +14,6 @@ void TooltipWindowComponent::setPosition(const sf::Vector2f& pos) {
 	m_tooltipWindow.setPosition(pos + m_offset);
 }
 
-void TooltipWindowComponent::setTextAlignment(TextAlignment alignment) {
-	m_tooltipWindow.setTextAlignment(alignment);
-}
-
 void TooltipWindowComponent::setTextOffset(const sf::Vector2f& offset) {
 	m_tooltipWindow.setTextOffset(offset);
 }

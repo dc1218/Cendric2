@@ -5,7 +5,6 @@
 #include "Screen.h"
 
 #include "GUI/Button.h"
-#include "GUI/BitmapText.h"
 #include "GUI/SaveGameWindow.h"
 #include "GUI/YesOrNoForm.h"
 #include "GUI/NewSaveGameForm.h"
@@ -26,7 +25,7 @@ private:
 
 	Button* m_saveButton = nullptr;
 	Button* m_deleteSaveGameButton = nullptr;
-	BitmapText* m_title = nullptr;
+	sf::Text* m_title = nullptr;
 
 	SaveGameWindow* m_saveGameWindow = nullptr;
 	NewSaveGameForm* m_newSaveGameForm = nullptr;

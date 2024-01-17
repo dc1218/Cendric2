@@ -79,8 +79,8 @@ private:
 	const Weapon* m_weapon;
 
 	InventorySlot* m_weaponSlot = nullptr;
-	BitmapText m_weaponName;
-	BitmapText m_noSlotsText;
+	sf::Text m_weaponName;
+	sf::Text m_noSlotsText;
 
 	std::vector<std::pair<SpellSlot*, std::vector<ModifierSlot*>>> m_weaponSlots;
 	SpellButtonGroup* m_buttonGroup = nullptr;

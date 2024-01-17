@@ -1,8 +1,10 @@
 #include "World/MovableGameObject.h"
 #include "Level/DynamicTiles/MovingParent.h"
+#include "GlobalResource.h"
 
 MovableGameObject::MovableGameObject() {
-	m_debugInfo = new BitmapText();
+	m_debugInfo = new sf::Text();
+	m_debugInfo->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_debugInfo->setColor(COLOR_BAD);
 }
 

@@ -1,5 +1,4 @@
 #include "Level/DamageNumbers.h"
-#include "GUI/BitmapText.h"
 #include "GUI/GUIConstants.h"
 #include "TextProvider.h"
 
@@ -16,7 +15,8 @@ DamageNumbers::DamageNumbers(bool isAlly) {
 		DamageNumberData numberData;
 		numberData.active = false;
 		numberData.startPosition = 0.f;
-		numberData.text = new BitmapText("", TextStyle::Shadowed, TextAlignment::Center);
+		numberData.text = new sf::Text();
+		numberData.text->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 		numberData.text->setCharacterSize(12);
 		m_data.push_back(numberData);
 	}
@@ -79,7 +79,7 @@ void DamageNumbers::emitString(std::string str, const sf::Vector2f& position, Da
 
 	data.active = true;
 	data.time = 0.f;
-	data.text->setString(str);
+	data.text->setString(sf::String::fromUtf8(str.begin(),str.end()));
 
 	int characterSize;
 	if (type == DamageNumberType::DamageOverTime || type == DamageNumberType::HealOverTime) {
@@ -91,7 +91,7 @@ void DamageNumbers::emitString(std::string str, const sf::Vector2f& position, Da
 	data.text->setCharacterSize(characterSize);
 	offset -= 1.5f * characterSize;
 
-	const sf::FloatRect& rect = data.text->getBounds();
+	const sf::FloatRect& rect = data.text->getLocalBounds();
 	sf::Vector2f startPosition = sf::Vector2f(position.x - 0.5f * rect.width, position.y + offset);
 	data.text->setPosition(startPosition);
 	data.startPosition = startPosition.y;

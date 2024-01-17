@@ -26,6 +26,7 @@ void Spellbook::init() {
 		GUIConstants::ORNAMENT_COLOR);
 
 	// init text
+	m_selectedTabText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_selectedTabText.setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
 	m_selectedTabText.setColor(COLOR_WHITE);
 	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -43,9 +44,11 @@ void Spellbook::init() {
 	m_weaponWindow->addCloseButton(std::bind(&Spellbook::hide, this));
 
 	// init empty text
+	m_emptyText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_emptyText.setString(g_textProvider->getText("NoSpells"));
-	const sf::FloatRect bounds = m_emptyText.getBounds();
+	std::string line = g_textProvider->getText("NoSpells");
+	m_emptyText.setString(sf::String::fromUtf8(line.begin(),line.end()));
+	const sf::FloatRect bounds = m_emptyText.getLocalBounds();
 	m_emptyText.setPosition(box.left + 0.5f * (box.width - bounds.width), box.top + 0.5f * (box.height - bounds.height));
 
 	reload();
@@ -432,19 +435,22 @@ void Spellbook::selectTab(SpellType type) {
 		reload = true;
 	}
 	m_currentTab = type;
+	std::string line;
 	switch (type) {
 	case SpellType::VOID:
-		m_selectedTabText.setString(g_textProvider->getText("Gems"));
+		line = g_textProvider->getText("Gems");
 		break;
 	case SpellType::Twilight:
 	case SpellType::Necromancy:
 	case SpellType::Divine:
 	case SpellType::Elemental:
-		m_selectedTabText.setString(g_textProvider->getText(EnumNames::getSpellTypeName(type)));
+		line = g_textProvider->getText(EnumNames::getSpellTypeName(type));
 		break;
 	default:
 		break;
 	}
+	if(line.size() > 0)
+		m_selectedTabText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	// center text
 	m_selectedTabText.setPosition(
 		m_window->getPosition().x +
@@ -528,11 +534,13 @@ void Spellbook::calculateModifierSlots() {
 	float modifierXOffset = GUIConstants::LEFT + WIDTH - 3 * ModifierSlot::SIZE - 2 * MARGIN - 2 * GUIConstants::TEXT_OFFSET;
 	float textYOffset = SpellSlot::ICON_SIZE / 2.f - GUIConstants::CHARACTER_SIZE_S / 2.f;
 	for (auto& it : m_core->getData().modfiersLearned) {
-		BitmapText text;
+		sf::Text text;
+		text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 		text.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 		text.setColor(COLOR_WHITE);
 		text.setPosition(sf::Vector2f(xOffset, yOffset + textYOffset));
-		text.setString(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it.first)));
+		std::string line = g_textProvider->getText(EnumNames::getSpellModifierTypeName(it.first));
+		text.setString(sf::String::fromUtf8(line.begin(),line.end()));
 		m_modifierTexts.push_back(text);
 		for (int i = 0; i < it.second; i++) {
 			SpellModifier modifier;
@@ -555,22 +563,26 @@ void Spellbook::calculateSpellSlots() {
 			SpellSlot* slot = new SpellSlot(it2);
 			slot->setPosition(sf::Vector2f(xOffset, yOffset));
 
-			BitmapText text;
+			sf::Text text;
+			text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 			text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 			text.setColor(COLOR_WHITE);
-			text.setString(g_textProvider->getText(EnumNames::getSpellIDName(it2)));
+			std::string line = g_textProvider->getText(EnumNames::getSpellIDName(it2));
+			text.setString(sf::String::fromUtf8(line.begin(),line.end()));
 			text.setPosition(sf::Vector2f(xOffset + SpellSlot::ICON_SIZE + SpellSlot::ICON_OFFSET + MARGIN, yOffset));
 
-			BitmapText textDesc;
+			sf::Text textDesc;
+			textDesc.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 			textDesc.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 			textDesc.setColor(COLOR_LIGHT_GREY);
-			textDesc.setString(g_textProvider->getCroppedText(
+			line = g_textProvider->getCroppedText(
 				EnumNames::getSpellIDName(it2) + "Desc", GUIConstants::CHARACTER_SIZE_S,
-				static_cast<int>(WIDTH - (SpellSlot::SIZE + 4 * MARGIN))));
+				static_cast<int>(WIDTH - (SpellSlot::SIZE + 4 * MARGIN)));
+			textDesc.setString(sf::String::fromUtf8(line.begin(),line.end()));
 			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::ICON_SIZE + SpellSlot::ICON_OFFSET + MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f));
 
-			std::pair<BitmapText, BitmapText> texts = std::pair<BitmapText, BitmapText>(text, textDesc);
-			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot*, std::pair<BitmapText, BitmapText>>(slot, texts));
+			std::pair<sf::Text, sf::Text> texts = std::pair<sf::Text, sf::Text>(text, textDesc);
+			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot*, std::pair<sf::Text, sf::Text>>(slot, texts));
 			yOffset += SpellSlot::SIZE + MARGIN;
 		}
 

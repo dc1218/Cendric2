@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "GUI/Window.h"
-#include "GUI/BitmapText.h"
 
 ///
 /// A tooltip for each slot. Created by the corresponding slots.
@@ -16,7 +15,6 @@ public:
 	void setPosition(const sf::Vector2f& position) override;
 	void setText(const std::string& text);
 	void setTextOffset(const sf::Vector2f& offset);
-	void setTextAlignment(TextAlignment alignment);
 	void setMaxWidth(int maxWidth);
 
 private:

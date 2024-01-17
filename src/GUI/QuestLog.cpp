@@ -51,10 +51,12 @@ void QuestLog::init() {
 	m_descriptionWindow = new QuestDescriptionWindow(m_core);
 
 	// init text
+	m_title.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_title.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET, TOP + GUIConstants::TEXT_OFFSET));
 	m_title.setColor(COLOR_WHITE);
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_title.setString(g_textProvider->getText("Journal"));
+	std::string line = g_textProvider->getText("Journal");
+	m_title.setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_title.setPosition(
 		m_window->getPosition().x +
 		WIDTH / 2 -
@@ -85,9 +87,11 @@ void QuestLog::init() {
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	// init empty text
+	m_emptyText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_emptyText.setString(g_textProvider->getText("NoQuests"));
-	const auto bounds = m_emptyText.getBounds();
+	line = g_textProvider->getText("NoQuests");
+	m_emptyText.setString(sf::String::fromUtf8(line.begin(),line.end()));
+	const auto bounds = m_emptyText.getLocalBounds();
 	m_emptyText.setPosition(scrollBox.left + 0.5f * (scrollBox.width - bounds.width), scrollBox.top + 0.5f * (scrollBox.height - bounds.height));
 
 	reload();
@@ -263,13 +267,14 @@ void QuestLog::hide() {
 
 QuestEntry::QuestEntry(const QuestData& data, WorldInterface* interface, bool isActiveQuest) {
 	m_data = data;
+	m_name.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	std::string questTitle = (isActiveQuest ? "  " : "") + g_textProvider->getText(m_data.id, "quest");
 	if (questTitle.size() > QuestLog::MAX_ENTRY_LENGTH_CHARACTERS) {
 		questTitle = questTitle.substr(0, QuestLog::MAX_ENTRY_LENGTH_CHARACTERS - 3) + "...";
 	}
-	m_name.setString(questTitle);
+	m_name.setString(sf::String::fromUtf8(questTitle.begin(),questTitle.end()));
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);

@@ -5,7 +5,6 @@
 #include "ResourceManager.h"
 #include "CharacterCore.h"
 
-#include "GUI/BitmapText.h"
 
 class ScreenManager;
 

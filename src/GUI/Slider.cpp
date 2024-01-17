@@ -19,8 +19,13 @@ Slider::Slider(int minPos, int maxPos) {
 
 	m_border = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLIDER), COLOR_WHITE, 2.f * BORDER_OFFSET + WIDTH, 2.f * BORDER_OFFSET + HEIGHT);
 
+	m_titleText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+
+	m_minText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_minText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_minText.setString(std::to_string(m_minPosition));
+
+	m_maxText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_maxText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_maxText.setString(std::to_string(m_maxPosition));
 
@@ -161,8 +166,9 @@ void Slider::setText(const std::string& text) {
 
 void Slider::setTextRaw(const std::string& text) {
 	m_title = text;
-	m_titleText.setString(g_textProvider->getCroppedString(
-		m_title + ": " + std::to_string(m_sliderPosition) + m_unit, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH)));
+	std::string line = g_textProvider->getCroppedString(
+		m_title + ": " + std::to_string(m_sliderPosition) + m_unit, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH));
+	m_titleText.setString(sf::String::fromUtf8(line.begin(),line.end()));
 
 	setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 }
@@ -186,9 +192,9 @@ void Slider::setEnabled(bool enabled) {
 		m_filler.getFillColor().g,
 		m_filler.getFillColor().b,
 		m_isEnabled ? 255 : 100));
-	m_titleText.setColorAlpha(m_isEnabled ? 255 : 100);
-	m_minText.setColorAlpha(m_isEnabled ? 255 : 100);
-	m_maxText.setColorAlpha(m_isEnabled ? 255 : 100);
+	// m_titleText.setColorAlpha(m_isEnabled ? 255 : 100);
+	// m_minText.setColorAlpha(m_isEnabled ? 255 : 100);
+	// m_maxText.setColorAlpha(m_isEnabled ? 255 : 100);
 }
 
 // SLIDER KNOB

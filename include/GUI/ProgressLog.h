@@ -1,7 +1,6 @@
 #pragma once
 
 #include "global.h"
-#include "BitmapText.h"
 #include "TextProvider.h"
 #include "GUIConstants.h"
 #include "Enums/EnumNames.h"

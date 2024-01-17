@@ -76,7 +76,9 @@ void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int 
 		if (it.second > 1) str += " x" + std::to_string(it.second);
 		std::string croppedStr = g_textProvider->getCroppedString(str, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH));
 
-		BitmapText* text = new BitmapText(croppedStr, TextStyle::Shadowed, TextAlignment::Left);
+		sf::Text* text = new sf::Text();
+		text->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+		text->setString(sf::String::fromUtf8(croppedStr.begin(),croppedStr.end()));
 		text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		sf::FloatRect bbox = text->getLocalBounds();
 		text->setPosition(xOffset + InventorySlot::SIZE + TEXT_MARGIN,
@@ -96,7 +98,9 @@ void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int 
 		if (gold > 1) str += " x" + std::to_string(gold);
 		std::string croppedStr = g_textProvider->getCroppedString(str, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH));
 
-		BitmapText* text = new BitmapText(croppedStr, TextStyle::Shadowed, TextAlignment::Left);
+		sf::Text* text = new sf::Text();
+		text->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+		text->setString(sf::String::fromUtf8(croppedStr.begin(),croppedStr.end()));
 		text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		sf::FloatRect bbox = text->getLocalBounds();
 		text->setPosition(xOffset + InventorySlot::SIZE + TEXT_MARGIN,

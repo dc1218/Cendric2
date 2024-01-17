@@ -47,9 +47,10 @@ void YesOrNoForm::update(const sf::Time& frameTime) {
 
 void YesOrNoForm::setMessage(const std::string& msg, const sf::Color& color) {
 	int characterSize = 16;
-	m_message = BitmapText(
-		g_textProvider->getCroppedText(msg, characterSize, static_cast<int>(m_window->getSize().x - (2 * DIST_FROM_BORDER))));
+	std::string line = g_textProvider->getCroppedText(msg, characterSize, static_cast<int>(m_window->getSize().x - (2 * DIST_FROM_BORDER)));
+	m_message.setString(sf::String::fromUtf8(line.begin(),line.end()));
 
+	m_message.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_message.setColor(color);
 	m_message.setCharacterSize(characterSize);
 	// calculate position

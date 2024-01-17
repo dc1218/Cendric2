@@ -1,6 +1,7 @@
 #include "Screens/ErrorScreen.h"
 #include "Screens/ScreenManager.h"
 #include "Logger.h"
+#include "GlobalResource.h"
 
 ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core) {
 	ErrorID error = g_resourceManager->pollError()->first;
@@ -19,7 +20,9 @@ ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core) {
 	}
 	g_resourceManager->loadTexture(m_screenResource, ResourceType::Unique, this);
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(m_screenResource)));
-	m_errorText = BitmapText(g_resourceManager->pollError()->second);
+	std::string line = g_resourceManager->pollError()->second;
+	m_errorText.setString(sf::String::fromUtf8(line.begin(),line.end()));
+	m_errorText.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_errorText.setColor(COLOR_BAD);
 	m_errorText.setPosition(sf::Vector2f(64, 518));
 	m_errorText.setCharacterSize(12);

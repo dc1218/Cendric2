@@ -6,7 +6,6 @@
 #include "ResourceManager.h"
 
 #include "GUI/Button.h"
-#include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 #include "GUI/OrnamentStyle.h"
 

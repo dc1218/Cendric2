@@ -24,6 +24,8 @@ SpellSlot::SpellSlot(SpellType type) {
 		g_textProvider->getText("EmptySlot") + " (" + 
 		g_textProvider->getText(EnumNames::getSpellTypeName(type)) + ")");
 
+	m_inputKey.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+
 	initSpellSlot();
 }
 
@@ -53,7 +55,7 @@ SpellSlot::SpellSlot(const SpellData& bean) {
 }
 
 void SpellSlot::setInputKeyText(const std::string& text) {
-	m_inputKey.setString(text);
+	m_inputKey.setString(sf::String::fromUtf8(text.begin(),text.end()));
 	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().width > SIZE - 10.f) ?
 		GUIConstants::CHARACTER_SIZE_S :
 		GUIConstants::CHARACTER_SIZE_L);

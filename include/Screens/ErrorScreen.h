@@ -16,6 +16,6 @@ public:
 
 private:
 	sf::Sprite m_screenSprite;
-	BitmapText m_errorText;
+	sf::Text m_errorText;
 	std::string m_screenResource;
 };

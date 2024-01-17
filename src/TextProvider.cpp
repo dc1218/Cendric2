@@ -1,7 +1,6 @@
 #include "TextProvider.h"
 #include "ResourceManager.h"
 #include "DatabaseManager.h"
-#include "GUI/BitmapText.h"
 
 TextProvider* g_textProvider;
 

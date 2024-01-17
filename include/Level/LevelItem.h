@@ -7,8 +7,8 @@
 #include "World/Item.h"
 #include "World/LightObject.h"
 
-#include "GUI/BitmapText.h"
 #include "Enums/ItemType.h"
+#include "GlobalResource.h"
 
 class LevelMainCharacter;
 class LevelScreen;

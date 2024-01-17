@@ -36,11 +36,17 @@ void CreditsScreen::render(sf::RenderTarget &renderTarget) {
 
 void CreditsScreen::execOnEnter() {
 	// text
-	m_title = new BitmapText(g_textProvider->getText("Credits"), TextStyle::Shadowed);
+	m_title = new sf::Text();
+	m_title->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	std::string line = g_textProvider->getText("Credits");
+	m_title->setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
 	m_title->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_title->getLocalBounds().width), 50.f));
 
-	m_credits = new BitmapText(g_textProvider->getText("CreditsText"), TextAlignment::Center);
+	m_credits = new sf::Text();
+	m_credits->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	line = g_textProvider->getText("CreditsText");
+	m_credits->setString(sf::String::fromUtf8(line.begin(),line.end()));
 	m_credits->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_credits->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_credits->getLocalBounds().width), 0.5f * WINDOW_HEIGHT));
 

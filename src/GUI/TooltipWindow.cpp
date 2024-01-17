@@ -38,10 +38,6 @@ void TooltipWindow::setTextOffset(const sf::Vector2f& offset) {
 	setWidth(m_text.getLocalBounds().width + 2 * m_textOffset.x);
 }
 
-void TooltipWindow::setTextAlignment(TextAlignment alignment) {
-	// m_text.setTextAlignment(alignment);
-}
-
 void TooltipWindow::setMaxWidth(int maxWidth) {
 	m_maxWidth = maxWidth;
 }
