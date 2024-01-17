@@ -2,3 +2,4 @@ build
 saves/autosave.sav
 .DS_Store
 ext/steam-sdk
+.vscode
